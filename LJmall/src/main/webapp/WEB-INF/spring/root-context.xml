@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    
+      <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+      <property name="user" value="scott"/>
+      <property name="password" value="tiger"/>
+      <property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.0.248:1521:orcl"/>
+<!--  <property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.1.100:1521:orcl"/> -->
+<!--  리눅스로 접속을 한다면 -->
+      <property name="maxPoolSize" value="100"/>
+      <property name="maxIdleTime" value="600"/>
+      <property name="idleConnectionTestPeriod" value="300"/>
+   </bean>
+   
+   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+      <property name="dataSource" ref="dataSource"/>
+   </bean>
+   
+   <!-- MyBatis 관련 Spring Bean 등록 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- DB접속 정보 및 커넥션 풀 정보 -->
+		
+		<property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+		<!-- MyBatis 기본 설정 파일의 경로 -->
+		
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:config/sqlmap-member.xml</value>
+				<value>classpath:config/sqlmap-product.xml</value>
+				<value>classpath:config/sqlmap-orders.xml</value>
+				<value>classpath:config/sqlmap-basket.xml</value>	
+				<value>classpath:config/sqlmap-review.xml</value>	
+				<value>classpath:config/sqlmap-inquiry.xml</value>								
+			</list>
+		</property>
+		<!-- MyBatis SQL 맵핑 관련 설정 파일들의 경로 -->
+	</bean>
+	
+	<!-- DAO 에서 사용할 template 객체 : 메서드를 가지는 객체 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" 
+		  destroy-method="clearCache">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+   
+   <!-- multipartResolver를 bean으로 등록(파일 업로드)  -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760"/>
+		<property name="maxInMemorySize" value="10485760"/>
+		<property name="defaultEncoding" value="utf-8"/>
+	</bean>
+   
+	<context:component-scan base-package="com.itbank.dao" />
+	<context:component-scan base-package="com.itbank.service" />
+	<context:component-scan base-package="com.itbank.utils" />
+</beans>

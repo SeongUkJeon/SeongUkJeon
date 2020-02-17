@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewDAO">
+	<insert id="registReview" parameterType="review">
+		insert into review
+		(product_code, userid, revnum, revcon, rating)
+		values (#{product_code},
+		#{userid}, review_seq.nextval, #{revcon}, #{rating})
+	</insert>
+
+	<select id="reviewList" resultType="reviewList">
+		select product_code,
+		review.userid, revnum, rating, revcon, revdate, member.username from review
+		inner join member on review.userid = member.userid where product_code
+		= #{product_code} order by revdate desc
+	</select>
+	
+	<!-- 상품 소감(댓글) 삭제 -->
+	<delete id="deleteReview">
+		delete review
+	    where revnum = #{revnum} and userid = #{userid}
+	</delete>
+		
+	<!-- 상품 소감(댓글) 수정 -->
+	<update id="modifyReview">
+	 update review
+	     set
+	         revcon = #{revcon}, rating = #{rating}
+	     where revnum = #{revnum}
+	         and userid = #{userid}
+	</update>
+	
+	<select id="reviewGetCount" resultType="int">
+		select count(*) from review where product_code = #{product_code}
+	</select>
+</mapper>

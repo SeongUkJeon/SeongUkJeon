@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="basketDAO">
+	<insert id="addBasket" parameterType="basket">
+		insert into basket
+		(basketnum, userid, product_code,
+		basketstock)
+		values (basket_seq.nextval, #{userid}, #{product_code},
+		#{basketstock})
+	</insert>
+	
+	<select resultType="basket" id="buyNow">
+		select row_number()
+			over(order by basketnum desc) as num, basketnum,
+			userid, basket.product_code, basketstock, adddate, product.product_name,
+			product.product_price, product.product_image1, product.product_detail1, product.product_detail2
+		from basket inner join product on basket.product_code = product.product_code
+		where basket.userid = #{userid}
+	</select>
+
+	<select id="basketList" resultType="basket">
+		select row_number()
+			over(order by basketnum desc) as num, basketnum,
+			userid, basket.product_code, basketstock, adddate, product.product_name,
+			product.product_price, product.product_image1, product.product_detail1, product.product_detail2
+		from basket inner join product on basket.product_code = product.product_code
+		where basket.userid = #{userid}
+	</select>
+	
+	<delete id="deleteBasket" parameterType="basket">
+		delete basket where basketnum = #{basketnum} and userid = #{userid}
+	</delete>
+	
+	<!-- 카트 비우기 -->
+	<delete id="basketAllDelete">
+		delete basket
+	    where userid = #{userid}
+	</delete>
+	
+	<select id="basketGetCountById" resultType="int">
+		select count(*) from basket where userid = #{userid}
+	</select>
+</mapper>

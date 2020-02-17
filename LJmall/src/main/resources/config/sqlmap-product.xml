@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="productDAO">
+	<select resultType="product" id="list" parameterType="hashmap">
+		select *
+		from product where product_detail1 = #{category} AND product_detail2 =
+		#{category2}
+	</select>
+
+	<select id="listAll" resultType="product">
+		select * from product where
+		product_delete = 0
+	</select>
+
+	<insert id="productInsert" parameterType="hashmap">
+		insert into product
+		(product_code, product_price, product_quantity, product_detail1,
+		product_detail2,
+		product_name, product_desc, product_image1,
+		product_image2, product_image3,
+		product_image4,
+		product_image5)
+		values
+		(product_seq.nextval,
+		#{product_price}, #{product_quantity},
+		#{product_detail1},
+		#{product_detail2},
+		#{product_name}, #{product_desc},
+		#{product_image1}, #{product_image2},
+		#{product_image3},
+		#{product_image4}, #{product_image5})
+	</insert>
+
+	<select id="detailView" resultType="product">
+		select * from product where
+		product_code = #{product_code}
+	</select>
+
+	<select resultType="product" id="newList">
+		<![CDATA[ SELECT * FROM ( SELECT * FROM product ORDER BY product_date DESC ) WHERE ROWNUM <= 3 ]]>
+	</select>
+
+	<update id="productModify" parameterType="hashmap">
+		update product set
+		product_name = #{product_name}, product_detail1 = #{product_detail1},
+		product_detail2 = #{product_detail2}, product_price = #{product_price},
+		product_quantity = #{product_quantity},
+		product_desc = #{product_desc}, product_image1 = #{product_image1}, product_image2
+		= #{product_image2},
+		product_image3 = #{product_image3}, product_image4 = #{product_image4},
+		product_image5 = #{product_image5}
+		where product_code = #{product_code}
+	</update>
+
+	<update id="productDelete" parameterType="int">
+		update product set product_delete = 1 where product_code = #{product_code}
+	</update>
+	
+	<!-- 상품 수량 조절 -->
+	<update id="changeQuantity" parameterType="product">
+		update product
+	    set product_quantity = product_quantity - #{product_quantity}
+		where product_code = #{product_code}
+	</update>
+	
+	<!-- 관리자를 제외한 모든 회원의 수를 가져온다(검색) -->
+	<select resultType="int" id="getCountProduct" parameterType="hashmap">
+		select count(*) from product where ${type} like '%'|| #{search} || '%'
+	</select>
+
+	<!-- 관리자를 제외한 모든 회원의 수를 가져온다 -->
+	<select resultType="int" id="getCountProduct1">
+		select count(*) from product
+	</select>
+
+	<!-- 페이지에 해당하는 회원정보를 받는다(검색) -->
+	<select resultType="product" id="selectProduct" parameterType="hashmap">
+		select * from (select rownum as st, A.* from(select * from product where ${type} like '%'|| #{search} || '%' 
+		<![CDATA[order by product_date desc) A 
+					where rownum <= #{end}) where st >= #{start}]]>
+	</select>
+
+	<!-- 페이지에 해당하는 회원정보를 받는다 -->
+	<select resultType="product" id="selectProduct1" parameterType="hashmap">
+		select * from (select rownum as st, A.* from(select * from product 
+		<![CDATA[order by product_date desc) A 
+					where rownum <= #{end}) where st >= #{start}]]>
+	</select>
+	
+	<update id="decQuantity" parameterType="hashmap">
+		update product set product_quantity = product_quantity - #{cnt} where product_code = #{product_code}
+	</update>
+</mapper>

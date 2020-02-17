@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="inquiryDAO">
+	<insert id="registInquiry" parameterType="question">
+		insert into inquiry(inquirynum, product_code, question, category, userid)
+			values ( inquiry_seq.nextval, #{product_code}, #{question}, #{category}, #{userid} )
+	</insert>
+
+	<select resultType="inquiryList" id="inquiryList"
+		parameterType="int">
+		select product_code, member.userid, CATEGORY, question,
+		answer, cdate, member.username
+		from INQUIRY inner join member on INQUIRY.USERID = member.userid
+		where product_code=#{product_code} order by cdate ASC
+	</select>
+	
+	<select resultType="inquiry" id="inquiryListByCategory"
+		parameterType="String">
+		select * from INQUIRY where category=#{category} order by cdate ASC
+	</select>
+	
+	<select resultType="inquiry" id="allInquiryList">
+		select * from INQUIRY order by cdate ASC
+	</select>
+
+	<select resultType="inquiry" id="getNoAnswer">
+		select * from inquiry where answer is null order by cdate ASC
+	</select>
+	
+	<select resultType="inquiry" id="getNoAnswer2">
+		select * from inquiry where answer is null and category = #{division } order by cdate ASC
+	</select>
+
+	<update id="setAnswer" parameterType="answer">
+		update inquiry set ANSWER = #{answer} 
+		where PRODUCT_CODE = #{product_code} and QUESTION=#{question}
+	</update>
+
+	<select resultType="inquiry" id="oneQuestion" parameterType="map">
+		select * from inquiry 
+		where product_code = #{product_code} and question = #{question}
+	</select>
+	
+	<!-- 소감(댓글) 지우기 -->
+	<delete id="deleteInquiry" parameterType="int">
+		delete inquiry
+	    where inquirynum = #{inquirynum}
+	</delete>
+	
+	<select id="getCategoryTypeCnt" resultType="int">
+		select count(*) from inquiry where category = #{category} and answer is null
+	</select>
+	
+		<!-- 내가 한 문의에 대한 모든 정보를 가져온다 -->
+	<select id="getInquiry" parameterType="String" resultType="inquiry">
+		select * from inquiry where userid = #{userid}
+		
+	</select>
+	
+	<select id="getNum" parameterType="map" resultType="int">
+		select count(*) from inquiry where userid = #{userid} and product_code = #{product_code}
+	
+	</select>
+	
+	<select id="getInquiry1" parameterType="map" resultType="inquiry">
+		select * from inquiry where userid = #{userid} and product_code = #{product_code}
+	
+	</select>
+</mapper>
