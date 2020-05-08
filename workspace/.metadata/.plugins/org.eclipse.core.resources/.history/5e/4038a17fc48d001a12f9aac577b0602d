@@ -1,0 +1,80 @@
+package com.dbinc.pgm;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+class GetDateClass {
+	List<String> getDate(boolean flag) {
+		List<String> date = new ArrayList<String>();
+		Calendar cal = Calendar.getInstance();
+		
+		int year = cal.get(cal.YEAR);
+		int month = cal.get(cal.MONTH) + 1;
+		/* 현재(시,분,초), 1일, 말일
+		 * int hour = cal.get ( cal.HOUR_OF_DAY ) ;
+		 * int min = cal.get ( cal.MINUTE );
+		 * int sec = cal.get ( cal.SECOND );
+		 * int startDay = cal.get(cal.DAY_OF_MONTH);
+		 * int endDay = cal.getActualMaximum(cal.DAY_OF_MONTH); 
+		 */
+
+		date.add(Integer.toString(year));
+		if(month < 10) date.add("0" + Integer.toString(month));
+		else date.add(Integer.toString(month));
+
+		if(flag == true) {
+			int day = cal.get(cal.DATE);
+			if(day < 10) date.add("0" + Integer.toString(day));
+			else date.add(Integer.toString(day));
+		}
+
+		return date;
+	}
+	
+	List<String> getFromDate(int from) {
+		List<String> fromDate = new ArrayList<String>();
+		Calendar cal = Calendar.getInstance();
+		
+		int year = cal.get(cal.YEAR);
+		int month = cal.get(cal.MONTH) + 1;
+		int day = cal.get(cal.DATE) - from;
+		/* 현재(시,분,초), 1일, 말일
+		 * int hour = cal.get ( cal.HOUR_OF_DAY ) ;
+		 * int min = cal.get ( cal.MINUTE );
+		 * int sec = cal.get ( cal.SECOND );
+		 * int startDay = cal.get(cal.DAY_OF_MONTH);
+		 * int endDay = cal.getActualMaximum(cal.DAY_OF_MONTH); 
+		 */
+		
+		if(day < 1) {
+			month -= 1;
+			cal.set(year, month, 1);
+			day = cal.getActualMaximum(Calendar.DAY_OF_MONTH) + day;
+		}
+
+		fromDate.add(Integer.toString(year));
+		
+		if(month < 10) fromDate.add("0" + Integer.toString(month));
+		else fromDate.add(Integer.toString(month));
+		
+		if(day < 10) fromDate.add("0" + Integer.toString(day));
+		else fromDate.add(Integer.toString(day));
+
+		return fromDate;
+	}
+	
+	int getLastDayMonth() {
+		Calendar cal = Calendar.getInstance();
+		
+		int year = cal.get(cal.YEAR);
+		int month = cal.get(cal.MONTH);
+		int day;
+		
+		cal.set(year, month, 1);
+		day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println(day);
+		
+		return day;
+	}
+}

@@ -1,0 +1,7 @@
+package com.dbinc.pgm.service.impl;
+
+import com.dbinc.pgm.service.CarringInOutByPeriodStatusService;
+
+public class CarringInOutByPeriodStatusServiceImpl implements CarringInOutByPeriodStatusService {
+
+}

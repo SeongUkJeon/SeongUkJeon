@@ -1,0 +1,6 @@
+package com.dbinc.pgm;
+
+public class Snippet {
+	<th scope="row">item.ixcd</th>
+}
+

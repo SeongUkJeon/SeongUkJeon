@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper namespace="com.dbinc.pgm.service.dao.JobTotalDAO">
+
+	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 boardVO 는 mybatis-confg.xml 에 Alias 되어 있습니다. -->
+	<select id="selectDailyInstallList" parameterType="DailyInstallSearchVO" resultType="DailyInstallResultVO"> 
+		select ix_cd as ixcd,
+		       sum(f20_qty) f2,
+		       sum(f40_qty) f4,
+		       sum(f45_qty) f5,
+		       sum(m20_qty) m2,
+		       sum(m40_qty) m4,
+		       sum(m45_qty) m5,
+		       sum(decode(rf_cd, 'Y', f20_qty)) rf2,
+		       sum(decode(rf_cd, 'Y', f40_qty + f45_qty)) rf4,
+		       sum(decode(imdg, 'Y', f20_qty)) im2,
+		       sum(decode(imdg, 'Y', f40_qty + f45_qty)) im4,
+		       sum(decode(ak_cd, 'Y', f20_qty)) ak2,
+		       sum(decode(ak_cd, 'Y', f40_qty + f45_qty)) ak4,
+		       sum(f20_qty + f40_qty + f45_qty + m20_qty + m40_qty + m45_qty) van,
+		       sum(f20_qty + m20_qty) +
+		       sum(f40_qty + f45_qty + m40_qty + m45_qty) * 2 teu
+		  From t_yardsm
+		 where sum_date = #{txtYear} || #{txtMonth} || #{txtDay} and cy_tp = #{opercd}
+		 group by ix_cd
+	</select>	
+</mapper>

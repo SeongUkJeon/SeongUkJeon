@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>통계</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/style.css" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous" />
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+	<div id="top"></div>
+	<c:set var="cpath" value="${pageContext.request.contextPath }"
+		scope="session" />
+	<header id="header">
+		<div id="header_box" align="center">
+			<div id="title" align="center">
+				<h1 class="title">DPCT</h1>
+			</div>
+		</div>
+		<nav id="nav">
+			<div id="nav_box">
+				<div class="dropmenu">
+					<ul id="view">
+						<li class="inline"><img
+							src="${pageContext.request.contextPath }/images/mypage.png"
+							style="height: 50px; width: auto;">
+							<ul class="list-group">
+								<li id="dropmenu"
+									class="list-group-item list-group-item-secondary"><a
+									href="${cpath }/myPage" class="text-dark">마이페이지</a></li>
+								<li id="dropmenu"
+									class="list-group-item list-group-item-secondary"><a
+									href="${cpath }/orderList" class="text-dark">주문조회</a></li>
+								<li id="dropmenu"
+									class="list-group-item list-group-item-secondary"><a
+									onclick="location.replace('/LJmall/logout')" class="text-dark"
+									id="logout">로그아웃</a></li>
+							</ul> <script>
+								$(".dropmenu ul li").hover(function() {
+									$(this).find("ul").stop().fadeToggle(300);
+								});
+							</script></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+</body>
+</html>

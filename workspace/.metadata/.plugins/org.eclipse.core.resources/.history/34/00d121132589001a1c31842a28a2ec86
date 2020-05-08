@@ -1,0 +1,7 @@
+package com.dbinc.pgm.vo;
+
+public class CarringInOutSearchVO {
+	String txtYear, txtMonth, txtDay;
+	String date;
+	String imexport;
+}

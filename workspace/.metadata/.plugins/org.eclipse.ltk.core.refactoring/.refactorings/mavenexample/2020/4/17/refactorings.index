@@ -1,0 +1,5 @@
+1587615870217	Delete element
+1587617302024	Move 'helloWorld.jsp' to 'webapp'
+1587617623007	Rename resource 'data-dispatcher-servlet.xml'
+1587617666232	Rename resource 'data-dispatcher.xml'
+1587618522883	Move 'helloWorld.jsp' to 'WEB-INF'

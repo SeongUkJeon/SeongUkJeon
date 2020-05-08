@@ -1,0 +1,158 @@
+package com.dbinc.pgm;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.dbinc.pgm.service.JobTotalService;
+import com.dbinc.pgm.vo.DailyInstallResultVO;
+import com.dbinc.pgm.vo.DailyJobStatusVO;
+import com.dbinc.pgm.vo.MonthlyJobStatusVO;
+import com.dbinc.pgm.vo.OperCdVO;
+import com.dbinc.pgm.vo.JobTotalSearchVO;
+
+@Controller
+public class JobTotalController {	
+	private GetDateClass functionClass = new GetDateClass();
+	private List<String> date = functionClass.getDate(true);
+			
+	@Resource(name = "jobTotalService")
+	private JobTotalService jobTotalService;
+	
+	@RequestMapping(value = "/yardInstallStatus", method = RequestMethod.GET)
+	public String yardInstallStatus(Model model) throws Exception {
+		List<OperCdVO> list = jobTotalService.selectOperCdList();
+		
+		model.addAttribute("date", date);
+	    model.addAttribute("list", list);
+	    
+	    return "jobTotal/yardInstallStatus";
+	}
+	
+	@RequestMapping(value = "/yardInstallStatus", method = RequestMethod.POST)
+	public String yardInstallStatus(JobTotalSearchVO vo, Model model) {
+		List<OperCdVO> list = null;
+		List<DailyInstallResultVO> data = null;
+		try{
+			list = jobTotalService.selectOperCdList();
+			data = jobTotalService.selectDailyInstallList(vo);
+		} catch(Exception e) {}
+		
+		if(data.isEmpty() == false) {
+			int f20sum = 0, f40sum = 0, f45sum = 0, m20sum = 0, m40sum = 0, m45sum = 0, rf20sum = 0, 
+					rf40sum = 0, dg20sum = 0, dg40sum = 0, ak20sum = 0, ak40sum = 0, vansum = 0, teusum = 0;
+			for (DailyInstallResultVO vo2 : data) {
+				if(vo2.getIxcd().equals("I") || vo2.getIxcd().equals("X") || vo2.getIxcd().equals("T") 
+						|| vo2.getIxcd().equals("S") || vo2.getIxcd().equals("M")) {
+					f20sum += vo2.getF2();
+					f40sum += vo2.getF4();
+					f45sum += vo2.getF5();
+					m20sum += vo2.getM2();
+					m40sum += vo2.getM4();
+					m45sum += vo2.getM5();
+					rf20sum += vo2.getRf2();
+					rf40sum += vo2.getRf4();
+					dg20sum += vo2.getIm2();
+					dg40sum += vo2.getIm4();
+					ak20sum += vo2.getAk2();
+					ak40sum += vo2.getAk4();
+					vansum += vo2.getVan();
+					teusum += vo2.getTeu();
+				}
+			}
+			
+			DailyInstallResultVO vo2 = new DailyInstallResultVO();
+			vo2.setAk2(ak20sum);
+			vo2.setAk4(ak40sum);
+			vo2.setF2(f20sum);
+			vo2.setF4(f40sum);
+			vo2.setF5(f45sum);
+			vo2.setIm2(dg20sum);
+			vo2.setIm4(dg40sum);
+			vo2.setIxcd("total");
+			vo2.setM2(m20sum);
+			vo2.setM4(m40sum);
+			vo2.setM5(m45sum);
+			vo2.setRf2(rf20sum);
+			vo2.setRf4(rf40sum);
+			vo2.setTeu(teusum);
+			vo2.setVan(vansum);
+			data.add(vo2);
+		}
+		
+		model.addAttribute("date", date);
+	    model.addAttribute("data", data);
+	    model.addAttribute("list", list);
+	    
+	    if(data.isEmpty()) model.addAttribute("flag", "fail");
+	    
+	    return "jobTotal/yardInstallStatus";
+	}
+	
+	@RequestMapping(value = "/dailyJobStatus", method = RequestMethod.GET)
+	public String dailyJobStatus(Model model) throws Exception {
+		List<OperCdVO> list = jobTotalService.selectOperCdList();
+
+		model.addAttribute("date", date);
+	    model.addAttribute("list", list);
+		
+		return "jobTotal/dailyJobStatus";
+	}
+
+	@RequestMapping(value = "/dailyJobStatus", method = RequestMethod.POST)
+	public String dailyJobStatus(JobTotalSearchVO vo, Model model) {
+		List<OperCdVO> list = null;
+		List<DailyJobStatusVO> data = null;
+		try{
+			list = jobTotalService.selectOperCdList();
+			data = jobTotalService.dailyJobStatus(vo);
+		} catch(Exception e) {
+			model.addAttribute("date", date);
+		    model.addAttribute("list", list);
+		    model.addAttribute("flag", "fail");
+		    
+			return "jobTotal/dailyJobStatus";
+		}
+		
+		model.addAttribute("date", date);
+	    model.addAttribute("data", data);
+	    model.addAttribute("list", list);
+		
+		return "jobTotal/dailyJobStatus";
+	}
+	
+	@RequestMapping(value = "/monthlyJobStatus", method = RequestMethod.GET)
+	public String monthlyJobStatus(Model model) throws Exception {
+		List<OperCdVO> list = jobTotalService.selectOperCdList();
+
+		model.addAttribute("date", date);
+	    model.addAttribute("list", list);
+		
+		return "jobTotal/monthlyJobStatus";
+	}
+	
+	@RequestMapping(value = "/monthlyJobStatus", method = RequestMethod.POST)
+	public String monthlyJobStatus(JobTotalSearchVO vo, Model model) {
+		date = functionClass.getDate(false);
+		
+		List<MonthlyJobStatusVO> data = null;
+		try{
+			data = jobTotalService.monthlyJobStatus(vo);
+		} catch(Exception e) {
+			model.addAttribute("date", date);
+		    model.addAttribute("flag", "fail");
+		    
+			return "jobTotal/monthlyJobStatus";
+		}
+		
+		model.addAttribute("date", date);
+	    model.addAttribute("data", data);
+		
+		return "jobTotal/monthlyJobStatus";
+	}
+}

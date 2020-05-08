@@ -1,0 +1,22 @@
+package com.dbinc.pgm.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.dbinc.pgm.service.CarringInOutByPeriodStatusService;
+import com.dbinc.pgm.service.dao.CarringInOutByPeriodStatusDAO;
+import com.dbinc.pgm.vo.CarringInOutByTimeVO;
+import com.dbinc.pgm.vo.CarringInOutSearchVO;
+
+@Service("carringInOutByPeriodStatusService")
+public class CarringInOutByPeriodStatusServiceImpl implements CarringInOutByPeriodStatusService {
+	@Autowired
+	private CarringInOutByPeriodStatusDAO carringInOutByPeriodStatusDAO;
+	
+	@Override
+	public List<CarringInOutByTimeVO> carringInOutByTime(CarringInOutSearchVO vo) throws Exception {
+		return null;
+	}
+}

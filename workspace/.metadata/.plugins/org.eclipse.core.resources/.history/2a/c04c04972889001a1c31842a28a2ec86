@@ -1,0 +1,119 @@
+package com.dbinc.pgm.vo;
+
+public class CarringInOutSearchVO {
+	String txtFromYear, txtFromMonth, txtFromDay;
+	String txtToYear, txtToMonth, txtToDay;
+	String imexport, fm, type, size;
+
+	public String getTxtFromYear() {
+		return txtFromYear;
+	}
+
+	public void setTxtFromYear(String txtFromYear) {
+		this.txtFromYear = txtFromYear;
+	}
+
+	public String getTxtFromMonth() {
+		return txtFromMonth;
+	}
+
+	public void setTxtFromMonth(String txtFromMonth) {
+		this.txtFromMonth = txtFromMonth;
+	}
+
+	public String getTxtFromDay() {
+		return txtFromDay;
+	}
+
+	public void setTxtFromDay(String txtFromDay) {
+		this.txtFromDay = txtFromDay;
+	}
+
+	public String getTxtToYear() {
+		return txtToYear;
+	}
+
+	public void setTxtToYear(String txtToYear) {
+		this.txtToYear = txtToYear;
+	}
+
+	public String getTxtToMonth() {
+		return txtToMonth;
+	}
+
+	public void setTxtToMonth(String txtToMonth) {
+		this.txtToMonth = txtToMonth;
+	}
+
+	public String getTxtToDay() {
+		return txtToDay;
+	}
+
+	public void setTxtToDay(String txtToDay) {
+		this.txtToDay = txtToDay;
+	}
+
+	public String getTxtYear() {
+		return txtYear;
+	}
+
+	public void setTxtYear(String txtYear) {
+		this.txtYear = txtYear;
+	}
+
+	public String getTxtMonth() {
+		return txtMonth;
+	}
+
+	public void setTxtMonth(String txtMonth) {
+		this.txtMonth = txtMonth;
+	}
+
+	public String getTxtDay() {
+		return txtDay;
+	}
+
+	public void setTxtDay(String txtDay) {
+		this.txtDay = txtDay;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getImexport() {
+		return imexport;
+	}
+
+	public void setImexport(String imexport) {
+		this.imexport = imexport;
+	}
+
+	public String getFm() {
+		return fm;
+	}
+
+	public void setFm(String fm) {
+		this.fm = fm;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+}

@@ -1,0 +1,7 @@
+package com.dbinc.pgm.vo;
+
+public class CarringInOutByDayVO {
+	String gubun;
+	int sunday, monday, tuesday, wednesday, thursday, friday, saturday;
+	int tot;
+}

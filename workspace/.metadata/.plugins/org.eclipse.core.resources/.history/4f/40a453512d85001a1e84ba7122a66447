@@ -1,0 +1,15 @@
+package com.dbinc.pgm.vo;
+
+public class BoardVO {
+
+	private String t_cntr;
+
+	public String getT_cntr() {
+		return t_cntr;
+	}
+
+	public void setT_cntr(String t_cntr) {
+		this.t_cntr = t_cntr;
+	}
+
+}

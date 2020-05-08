@@ -1,0 +1,984 @@
+body {
+	text-align: center;
+	color: #797b80;
+	font: normal 12px 'Dotum', '돋움';
+	margin: 0;
+	padding: 0;
+	letter-spacing: 0;
+}
+
+#title {
+	width: 20%;
+	display: inline-block;
+	float: left;
+}
+
+.inline {
+	display: inline-block;
+	width: 50%;
+}
+
+#topmenu {
+	width: 50%;
+	display: inline-block;
+	margin-left: 50px;
+	float: left;
+}
+
+ul, ol, menu, li, dd, dt, dl {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+div#root {
+	width: 90%;
+	margin: 0 auto;
+}
+
+header#header {
+	font-size: 20px;
+	padding: 20px 0;
+	margin: auto;
+	width: 1000px;
+	height: 150px;
+	margin-top: 50px;
+}
+
+header#header h1 a {
+	color: #000;
+	font-weight: bold;
+}
+
+header#header_box {
+	margin: auto;
+	height: 110px;
+}
+
+.memberJoin {
+	border:none;
+	background-color: white;
+	width: 84px;
+}
+
+input#gender {
+	width: 64px;
+}
+
+.memberJoin:hover {
+	text-decoration: underline;
+}
+
+#view {
+	display: inline-block;
+}
+
+nav#nav {
+	padding: 10px;
+	text-align: right;
+	width: 1000px;
+	margin: auto;
+}
+
+nav#nav ul li {
+	margin-top: -22px;
+}
+
+nav#nav ul li#basket {
+	margin-top: -10px;
+}
+
+section#container {
+	padding: 0;
+	border-top: 2px solid #eee;
+	border-bottom: 2px solid #eee;
+}
+
+section#container::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+aside {
+	height: 2000px;
+	float: left;
+	width: 20%;
+	background-color: #eee;
+}
+
+aside>ul {
+	margin-top: 30px;
+}
+
+section#content {
+	margin-top: 30px;
+	float: right;
+	width: 77%;
+}
+
+div#container_box {
+	margin: auto;
+}
+
+aside ul li {
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+aside>ul>li>ul {
+	margint-bottom: 30px;
+}
+
+aside ul li a {
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+}
+
+a {
+	color: #000;
+}
+
+aside ul li a:hover {
+	background: #eee;
+}
+
+#Aaside:hover {
+	text-decoration: none;
+}
+
+footer#footer {
+	background: #f3f3f3;
+	padding: 30px 0px;
+	position: relative;
+	width: 100%;
+}
+
+div#footer_box {
+	width: 720px;
+	margin: 0 auto;
+}
+
+input#loginCheckBox {
+	width: 33px;
+	margin-left: 5px;
+}
+
+#footer #footer_box #info {
+	position: relative;
+	padding-top: 3px;
+	top: auto;
+	left: auto;
+}
+
+#footer #contract {
+	padding-top: 30px;
+	margin: 0 auto;
+	width: 720px;
+}
+
+#footer #footer_box #contract>ul>li {
+	position: relative;
+	float: left;
+	padding: 0 15px;
+}
+
+#footer #footer_box #contract>ul>li>a {
+	font: 500 13px/13px 'NotosansKR', 'Nanum Gothic', dotum;
+	color: a5a5a5;
+}
+
+#footer #footer_box #contract>ul>li strong {
+	color: #545454;
+}
+
+footer#footer ul li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.main {
+	display: inline-block; 
+	margin-top: 20px;
+	width: 33.1%;
+}
+
+.main div {	
+	padding: 0; 
+	text-align: center; 
+	margin: 0;
+	width: 100%;
+}
+
+.main div a img {
+	width: 100%;
+}
+
+.inputArea {
+	margin: 10px 0;
+}
+
+#product_image {
+	width: 210px;
+}
+
+select {
+	width: 100px;
+}
+
+label {
+	display: inline-block;
+	width: 105px;
+	padding: 5px;
+}
+
+label[for='product_desc'] {
+	display: block;
+}
+
+input {
+	width: 210px;
+}
+
+textarea#product_desc {
+	width: 400px;
+	height: 180px;
+}
+
+.dropmenu ul ul {
+	position: absolute; 
+	display: none;
+}
+
+.dropmenu ul ul li {
+	display: block;
+}
+
+.dropmenu ul li {
+	display: inline-block; 
+	margin-left: -5.5px;
+}
+
+.dropmenu ul li a {
+	display: block;
+	line-height: 43px;
+}
+
+div.product {
+	margin-bottom: 50px;
+}
+
+div.product div.productImg {
+	float: left;
+	width: 50%;
+}
+
+div.product div.productImg img {
+	width: auto;
+	height: 500px;
+}
+
+div.product div.productInfo {
+	font-size: 22px;
+	text-align: left;
+	width: 700px;
+    margin-left: 20%;
+    background-color: #eee;
+    padding-top: 10px;
+    border-left-width: 10px;
+    padding-bottom: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+div.product div.productInfo p {
+	margin: 0 0 20px 0;
+}
+
+div.product div.productInfo p span {
+	display: inline-block;
+	width: 100px;
+	margin-right: 15px;
+}
+
+div.product div.productInfo p.cartStock input {
+	text-align: right;
+	font-size: 22px;
+	width: 50px;
+	padding: 5px;
+	margin: 0;
+	border: 1px solid #eee;
+}
+
+div.product div.productInfo p.cartStock button {
+	font-size: 26px;
+	border: none;
+	background: none;
+}
+
+div.product div.productInfo p.addToCart {
+	text-align: left;
+}
+
+button {
+	font-size: 20px;
+	padding: 5px 10px;
+	margin: 10px 0;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+div.productDesc {
+	margin-bottom: 30px;
+    font: 400 13px/1.5rem 'NotoSansKR','Nanum Gothic';
+    color: #000;
+    word-break: keep-all;
+}
+
+div.product {
+	height: 500px;
+}
+
+div.detailImg>p>img {
+	width: 720px;
+}
+
+div.reply, div.detailImg, div.productDesc {
+	margin: 20px;
+}
+
+div.reply {
+	border: 2px solid #eee;
+	padding: 20px;
+}
+
+section.replyForm {
+	padding: 30px 0;
+}
+
+#star_grade {
+	float: left;
+	width: 100px;
+}
+
+input#revcon {
+	width: 600px;
+}
+
+section.replyForm div.input_area {
+	margin: 10px 0;
+}
+
+section.replyForm textarea {
+	font-size: 16px;
+	font-family: '맑은 고딕', verdana;
+	padding: 10px;
+	width: 500px;;
+	height: 150px;
+}
+
+section.replyList {
+	padding: 30px 0;
+}
+
+section.replyList ol {
+	padding: 0;
+	margin: 0;
+}
+
+section.replyList ol li {
+	padding: 10px 0;
+	border-bottom: 2px solid #eee;
+}
+
+section.replyList div.userInfo {
+	
+}
+
+section.replyList div.userInfo .userName {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+section.replyList div.userInfo .date {
+	color: #999;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+section.replyList div.replyContent {
+	padding: 10px;
+	margin: 20px 0;
+}
+
+button#replybtn {
+	float: right;
+}
+
+.btfTab {
+	margin: auto;
+	width: 77.7%;
+	text-align: center;
+	padding: 10px 0px;
+	background-color: white;
+	border-top: 2px solid #555;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	list-style-type: none;
+	font-size: 0;
+}
+
+#fn1, #fn2, #fn3 {
+	padding-top: 115px;
+}
+
+.jbFixed {
+	position: fixed;
+	top: 0px;
+}
+
+.btfTab>ul>li {
+	display: inline-block;
+	padding: 15px 20px 14px;
+	width: 33.33%;
+	text-align: center;
+	color: #555;
+	font-weight: bold;
+	font-size: 16px;
+	box-sizing: border-box;
+	cursor: pointer;
+	background-color: white;
+}
+
+#star_grade a, div.replyContent a {
+	text-decoration: none;
+	color: gray;
+}
+
+div.replyContent div.reviewContent {
+	display: inline-block;
+	margin-left: 50px;
+}
+
+#star_grade a.on, div.replyContent a.on {
+	color: red;
+}
+
+#star1, #star2, #star3, #star4, #star5, #star11, #star22, #star33, #star44, #star55 {
+	cursor: pointer;
+}
+
+#prod-inquiry-list__emphasis ul li {
+	font-size: 13px;
+	color: rgb(85, 85, 85);
+	letter-spacing: -1px;
+	font-family: "apple sd gothic neo", "malgun gothic", "맑은 고딕",
+		nanumgothic, 나눔고딕, dotum, 돋움, sans-serif;
+	padding: 0px 0px 0px 10px;
+	margin: 5px 0px 0px;
+	background:
+		url(//img1a.coupangcdn.com/image/coupang/product/bg-product-inquiry-01.png)
+		left 4px no-repeat;
+}
+
+em {
+	color: #111;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+div#info p {
+	display: inline-block;
+	margin-bottom: 8px;
+	font: 400 13px/13px 'NotoSansKR', 'Nanum Gothic', dotum;
+	letter-spacing: -.5px;
+	color: #999;
+}
+
+div#contract>ul>li>a {
+	font: 500 13px/13px 'NotosansKR', 'Nanum Gothic', dotum;
+	color: #797b80;
+}
+
+.productTitle {
+	margin-bottom: 40px;
+}
+
+.productTitle .ctgr {
+	margin-bottom: 15px;
+	font: 30px/30px 'adiLight';
+	text-align: center;
+}
+
+.productTitle * {
+	color: #000;
+	text-transform: uppercase;
+}
+
+.productTitle .tit {
+	font: 700 32px/32px 'NotoSansKR', 'Nanum gothic';
+	text-align: center;
+}
+
+section.replyList div.replyFooter button {
+	font-size: 14px;
+	border: 1px solid #999;
+	background: none;
+	margin-right: 10px;
+}
+
+div.replyFooter {
+	float: right;
+}
+
+div.reviewModal {
+	position: relative;
+	z-index: 1;
+	display: none;
+}
+
+div.modalBackground {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: -1;
+}
+
+div.modalContent {
+	position: fixed;
+	top: 20%;
+	left: calc(50% - 450px);
+	width: 50%;
+	height: 520px;
+	padding: 20px 10px;
+	background: #fff;
+	border: 2px solid #666;
+}
+
+div.modalContent textarea {
+	font-size: 16px;
+	font-family: '맑은 고딕', verdana;
+	padding: 10px;
+	width: 100%;
+	height: 200px;
+}
+
+div.modalContent button {
+	font-size: 20px;
+	padding: 5px 10px;
+	margin: 10px 0;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+div.modalContent button.modal_cancel {
+	margin-left: 20px;
+}
+
+section#content ul li {
+	margin: 10px 0;
+	width: 33%;
+}
+
+section#content ul li.allCheck {
+	width: 100%;
+}
+
+#logout {
+	cursor: pointer;
+}
+
+#logout:hover {
+	text-decoration: underline;
+}
+
+div.dropmenu {
+    width: 3%;
+    float:right;
+}
+
+section#content ul li.inline {
+	width: 49%;
+}
+
+div.goodsName>a>img {
+	width: 100%;
+}
+
+section#content ul li::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+section#content div.thumb {
+	float: left;
+	width: 330px;
+	display: inline-block;
+}
+
+section#content div.gdsInfo {
+	text-align: left;
+	font-size: 20px;
+	line-height: 2;
+	width: 400px;
+	display: inline-block;
+}
+
+section#content div.gdsInfo span {
+	display: inline-block;
+	width: 100px;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+section#content div.gdsInfo .delete {
+	display: inline-block;
+}
+
+section#content div#basketList {
+	width: 800px;
+	margin: auto;
+}
+
+.allCheck {
+	float: left;
+	width: 200px;
+}
+
+nav#nav ul li#dropmenu {
+    margin: auto;
+	background-color: white;
+	width: 142px;
+}
+
+.allCheck input {
+	width: 16px;
+	height: 16px;
+}
+
+.allCheck label {
+	margin-left: 10px;
+}
+
+.delBtn {
+	float: right;
+	text-align: right;
+	margin-right: 25px;
+}
+
+.delBtn button {
+	font-size: 18px;
+	padding: 5px 10px;
+	border: 1px solid #eee;
+	background: #eee;
+}
+
+.checkBox {
+	float: left;
+	width: 85px;
+}
+
+.checkBox input {
+	width: 16px;
+	height: 16px;
+}
+
+#moveBtn {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	z-index: 999;
+}
+
+.upBtn {
+	border-bottom: none;
+}
+
+.upBtn, .downBtn {
+	background: #fff;
+	border: 2px solid #eee;
+	padding: 5px;
+	font-size: 20px;
+	outline: none;
+	display: block;
+}
+
+.listResult {
+	padding: 20px;
+	background: #eee;
+}
+
+.listResult .sum {
+	float: left;
+	width: 45%;
+	font-size: 22px;
+}
+
+.listResult .orderOpne {
+	float: right;
+	width: 45%;
+	text-align: right;
+}
+
+.listResult .orderOpne button {
+	font-size: 18px;
+	padding: 5px 10px;
+	border: 1px solid #999;
+	background: #fff;
+}
+
+.listResult::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.orderInfo {
+	border: 5px solid #eee;
+	padding: 20px;
+	display: none;
+	text-align: left;
+}
+
+.orderInfo .inputArea {
+	margin: 10px 0;
+}
+
+.orderInfo .inputArea label {
+	display: inline-block;
+	width: 120px;
+	margin-right: 10px;
+}
+
+.orderInfo .inputArea input {
+	font-size: 14px;
+	padding: 5px;
+}
+
+.setInvoiceNum {
+	border: 5px solid #eee;
+	padding: 20px;
+	display: none;
+	text-align: left;
+}
+
+.setInvoiceNum .inputArea {
+	margin: 10px 0;
+}
+
+.setInvoiceNum .inputArea label {
+	display: inline-block;
+	width: 120px;
+	margin-right: 10px;
+}
+
+#useraddr2, #useraddr3, jibunAddress {
+	width: 250px;
+}
+
+div#addr {
+	display: inline-block;
+}
+
+.orderInfo .inputArea:last-child {
+	margin-top: 30px;
+}
+
+.orderInfo .inputArea button {
+	font-size: 20px;
+	border: 2px solid #ccc;
+	padding: 5px 10px;
+	background: #fff;
+	margin-right: 20px;
+}
+
+section#content .orderList span {
+	font-size: 20px;
+	font-weight: bold;
+	display: inline-block;
+	width: 90px;
+	margin-right: 10px;
+}
+
+section#content div.goodsName {
+	padding: 10px 0;
+	text-align: center;
+	width: 100%;
+}
+
+.orderInfo {
+	border: 5px solid #eee;
+	padding: 10px 20px;
+	margin: 20px 0;
+}
+
+.orderInfo span {
+	font-size: 20px;
+	font-weight: bold;
+	display: inline-block;
+	width: 90px;
+}
+
+.orderInfoAdmin {
+	border: 5px solid #eee;
+	padding: 10px 20px;
+	margin: 20px 0;
+}
+
+.orderInfoAdmin span {
+	font-size: 20px;
+	font-weight: bold;
+	display: inline-block;
+	width: 90px;
+}
+
+.orderView li {
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #999;
+}
+
+.orderView li::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.thumb {
+	float: left;
+	width: 200px;
+}
+
+.thumb img {
+	width: 200px;
+	height: 200px;
+}
+
+.gdsInfo {
+	float: right;
+	width: calc(100% - 220px);
+	line-height: 2;
+}
+
+.gdsInfo span {
+	font-size: 20px;
+	font-weight: bold;
+	display: inline-block;
+	width: 100px;
+	margin-right: 10px;
+}
+
+.deliveryChange {
+	text-align: right;
+}
+
+.delivery1_btn, .delivery2_btn {
+	font-size: 16px;
+	background: #fff;
+	border: 1px solid #999;
+	margin-left: 10px;
+}
+
+.replyInfo {
+	background: #eee;
+	padding: 10px;
+	font-size: 18px;
+	height: 290px;
+}
+
+.replyInfo span {
+	font-size: 20px;
+	font-weight: bold;
+	margin-right: 20px;
+}
+
+.replyContent {
+	padding: 10px;
+}
+
+.replyControll {
+	text-align: right;
+	padding: 10px;
+}
+
+.replyControll button {
+	border: 2px solid #999;
+	background: #fff;
+}
+
+section.orderList {
+	padding: 30px 0;
+}
+
+section.orderList ol {
+	padding: 0;
+	margin: 0;
+}
+
+section.orderList ol li {
+	padding: 10px 0;
+	border-bottom: 2px solid #eee;
+}
+
+div#privacy {
+	background: none repeat scroll 0 0 #F5F5F5;
+    border-bottom: 3px solid #333333;
+    border-top: 3px solid #333333;
+    clear: both;
+    color: #8F8F8F;
+    font-size: 0.9em;
+    line-height: 2em;
+    padding: 20px;
+}
+
+div#agreeInner {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #BCBCBC;
+    padding: 20px 20px 37px;
+} 
+
+div#join {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #BCBCBC;
+    padding: 20px 20px 37px;
+    width: 450px;
+} 
+
+div#join div.input_area label {
+	text-align: left;
+}
+
+div#join>fieldset>label>input {
+	width: 235px;
+}
+
+div#orderList {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 3px solid #333333;
+    border-top: 3px solid #333333;
+    clear: both;
+    color: #8F8F8F;
+    font-size: 0.9em;
+    line-height: 2em;
+    padding: 20px;
+}
+
+div#listInner {
+	background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #BCBCBC;
+    padding: 20px 20px 37px;
+} 
+
+#inquiryListBtn {
+	display: inline-block;
+}
+
+span.boxsub {
+	color: blue;
+}

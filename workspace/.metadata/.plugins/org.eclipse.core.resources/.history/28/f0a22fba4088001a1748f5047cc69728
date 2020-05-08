@@ -1,0 +1,7 @@
+package com.dbinc.pgm.vo;
+
+public class DailyJobStatusVO {
+	private int num, van, teu;
+	private int f20, f40, f45, m20, m40, m45, ng20, ng40, ng45, rf20, rf40, dg20, dg40,sp20, sp40, bo20, bo40;
+	
+}

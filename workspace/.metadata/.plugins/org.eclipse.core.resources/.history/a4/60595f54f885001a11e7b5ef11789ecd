@@ -1,0 +1,23 @@
+package com.dbinc.pgm.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.dbinc.pgm.service.JobTotalService;
+import com.dbinc.pgm.service.dao.OperCdDAO;
+import com.dbinc.pgm.vo.OperCdVO;
+
+@Service("operCdService")
+public class OperCdServiceImpl implements JobTotalService {
+	@Autowired
+	private OperCdDAO operCdMapper;
+
+	@Override
+	@Transactional
+	public List<OperCdVO> selectOperCdList() throws Exception {
+		return operCdMapper.selectOperCdList();
+	}
+}

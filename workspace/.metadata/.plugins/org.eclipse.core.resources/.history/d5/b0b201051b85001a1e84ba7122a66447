@@ -1,0 +1,5 @@
+package com.dbinc.pgm.controller;
+
+public class HelloWorldController {
+
+}

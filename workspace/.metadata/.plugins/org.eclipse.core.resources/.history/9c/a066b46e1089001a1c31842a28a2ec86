@@ -1,0 +1,93 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>통계</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/style.css" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous" />
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+	<div id="top"></div>
+	<c:set var="cpath" value="${pageContext.request.contextPath }"
+		scope="session" />
+	<header id="header">
+		<div id="header_box" align="center">
+			<div id="title" align="center">
+				<h1 class="title"><a href="${cpath }">DPCT</a></h1>
+			</div>
+		</div>
+		<div class="dropmenu1">
+			<ul id="view"> 
+				<li class="inline" style="font-size: 25px; margin-top: 7px;"> 메뉴
+					<div class="dropmenu2">
+					<ul class="list-group1">
+						<li id="dropmenu1"
+							class="list-group-item list-group-item-secondary">작업 집계
+							<ul class="list-group2" style="top: -1px; margin-left: 178px;">
+								<li id="dropmenu2"
+									class="list-group-item list-group-item-secondary">
+									<a href="${cpath }/yardInstallStatus" class="text-dark">
+										YARD 장치 현황(日)
+									</a>
+								</li>
+								<li id="dropmenu2"
+									class="list-group-item list-group-item-secondary">
+									<a href="${cpath }/dailyJobStatus" class="text-dark">작업 현황(日)</a>
+								</li>
+								<li id="dropmenu2"
+									class="list-group-item list-group-item-secondary">
+									<a href="${cpath }/monthlyJobStatus" class="text-dark">작업 현황(月)</a>
+								</li>
+							</ul> 	
+						</li>
+						<li id="dropmenu1"
+							class="list-group-item list-group-item-secondary">기간별 반출입 현황
+							<ul class="list-group2" style="top: -1px; margin-left: 178px;">
+								<li id="dropmenu2"
+									class="list-group-item list-group-item-secondary">
+									<a href="${cpath }/timeCarringInOut" class="text-dark">시간대별</a>
+								</li>
+								<li id="dropmenu2"
+									class="list-group-item list-group-item-secondary">
+									<a href="${cpath }/dayCarringInOut" class="text-dark">요일별</a>
+								</li>
+								<li id="dropmenu2"
+									class="list-group-item list-group-item-secondary">
+									<a href="${cpath }/dailyCarringInOut" class="text-dark">일별</a>
+								</li>
+							</ul> 	
+						</li>
+					</ul> 
+					</div>
+					<script>
+						$(".dropmenu1 ul#view li.inline").hover(function() {
+							$(this).find("ul.list-group1").stop().fadeToggle(300);
+						});
+						
+						$(".dropmenu2 ul.list-group1 li#dropmenu1").hover(function() {
+							$(this).find("ul.list-group2").stop().fadeToggle(300);
+						});
+					</script>	
+				</li>
+			</ul>
+		</div>
+		<div id="logo">
+			<img src="${cpath }/resources/images/svi.jpg" style="height: auto; width: 300px; margin: 0 auto;">
+		</div>
+	</header>

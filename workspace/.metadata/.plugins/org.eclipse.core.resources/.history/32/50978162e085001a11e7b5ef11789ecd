@@ -1,0 +1,413 @@
+<@-- 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/common/header.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<div id="container_box">
+	<%@ include file="/WEB-INF/views/include/aside.jsp"%>
+	<section id="content">
+		<div class="product" align="center" style="margin-left: 7%;">
+			<div class="productImg">
+				<img src="${cpath }/images/${view.product_detail1 }/${view.product_detail2 }/${view.product_image1 }">
+			</div>
+			<div class="productInfo">
+				<form>
+					<input type="hidden" name="n" value="${view.product_code}" id="n">
+					<input type="hidden" name="product_code" value="${view.product_code}" id="product_code">
+					<p class="productName">
+						<span>상품명</span>${view.product_name}</p>
+
+					<p class="cateName">
+						<span>구분</span>${view.product_detail1}, ${view.product_detail2}
+					</p>
+
+					<p class="productPrice">
+						<span>가격 </span>
+						<fmt:formatNumber pattern="###,###,###"
+							value="${view.product_price}" /> ￦
+					</p>
+
+					<c:if test="${view.product_quantity < 11 && view.product_quantity > 0}">
+						<span><strong style="color: red">재고가 ${view.product_quantity }개 남았습니다.</strong></span>
+					</c:if>
+
+					<c:if test="${view.product_quantity < 1}">
+						<span><strong>매진</strong></span>
+					</c:if>
+
+					<c:if test="${view.product_quantity > 0}">
+						<p class="cartStock">
+							<span>구입 수량</span>
+							<button type="button" class="plus">+</button>
+							<input type="number" class="numBox" min="1" name="basketstock"
+								max="${view.product_quantity}" value="1" readonly="readonly" />
+							<button type="button" class="minus">-</button>
+
+							<script>
+								$(".plus").click(function(){
+									var num = $(".numBox").val();
+									var plusNum = Number(num) + 1;
+									
+									if(plusNum > ${view.product_quantity}) {
+									 $(".numBox").val(num);
+									} else {
+									 $(".numBox").val(plusNum);          
+									}
+								});
+								
+								$(".minus").click(function(){
+									var num = $(".numBox").val();
+									var minusNum = Number(num) - 1;
+									
+									if(minusNum <= 0) {
+									 $(".numBox").val(num);
+									} else {
+									 $(".numBox").val(minusNum);          
+									}
+								});
+							 </script>
+						</p>
+
+						<p class="addToCart">
+							<button type="submit" class="addBasket_btn">장바구니 담기</button>
+							<button type="submit" class="buyNow_btn" formaction="buyNow?n=${view.product_code }" formmethod="post">즉시 구매</button>
+							
+							<script>
+								$(".addBasket_btn").click(function(){
+									var product_code = $("#product_code").val();
+									var basketstock = $(".numBox").val();
+									   
+									var data = {
+										product_code : product_code,
+										basketstock : basketstock
+									};
+									 
+									$.ajax({
+										url : "${cpath}/detail/addBasket",
+										type : "post",
+										data : data,
+										success : function(result){
+											if(result == 1) {
+										    	alert("카트 담기 성공");
+										    	$(".numBox").val("1");
+										    } else {
+										    	location.replace("${cpath}/login?next=/detail?n=" + product_code);
+										    }
+										},
+										error : function(){
+											alert("담기 실패");
+										}
+									});
+								});
+							</script>
+						</p>
+					</c:if>
+				</form>
+			</div>
+		</div>
+		
+		
+		<div class="btfTab" align="center">
+			<ul>
+				<li><a onclick="fnMove('1')">상품 상세</a></li>
+				<li><a onclick="fnMove('2')">상품 평<span class="product-tab-review-count">(${revCnt })</span></a></li>
+				<li><a onclick="fnMove('3')">상품/교환/반품/배송/환불 문의</a></li>
+			</ul>
+			
+			<script>
+		    	$( document ).ready( function() {
+		        	var jbOffset = $( '.btfTab' ).offset();
+			        $( window ).scroll( function() {
+			        	if ( $( document ).scrollTop() > jbOffset.top ) {
+			          		$( '.btfTab' ).addClass( 'jbFixed' );
+			          	} else {
+			            	$( '.btfTab' ).removeClass( 'jbFixed' );
+			          	}
+			        });
+		      	});
+		    	
+		    	 function fnMove(seq){
+		    	    var offset = $("#fn" + seq).offset();
+		    	 	$('html, body').animate({scrollTop : offset.top}, 400);
+		    	 }
+		    </script>
+		</div>
+		<div id="fn1"></div>
+		<div class="detailImg" align="center">
+		<c:if test="${view.product_image2 != null}">
+			<p>
+				<img src="${cpath }/images/${view.product_detail1 }/${view.product_detail2 }/${view.product_image2 }">
+			</p>
+		</c:if>
+		<c:if test="${view.product_image3 != null}">
+			<p>
+				<img src="${cpath }/images/${view.product_detail1 }/${view.product_detail2 }/${view.product_image3 }">
+			</p>
+		</c:if>	
+		<c:if test="${view.product_image4 != null}">
+			<p>
+				<img src="${cpath }/images/${view.product_detail1 }/${view.product_detail2 }/${view.product_image4 }"">
+			</p>
+		</c:if>
+		<c:if test="${view.product_image5 != null}">
+			<p>
+				<img src="${cpath }/images/${view.product_detail1 }/${view.product_detail2 }/${view.product_image5 }">
+			</p>
+		</c:if>
+		</div>
+		<div class="productTitle">
+			<p class="ctgr">${view.product_detail1 } ${view.product_detail2 }</p>
+			<p class="tit">${view.product_name }</p>
+		</div>
+		<div class="productDesc">${view.product_desc}</div>
+
+		<div id="fn2"></div>
+		<div class="reply">
+			<h3>상품평</h3>
+			<c:if test="${loginuser == null }">
+				<p style="float: right">
+					리뷰를 남기시려면 <a href="login?next=/detail?n=${view.product_code}">로그인</a>해주세요.
+				</p>
+			</c:if>
+
+			<c:if test="${loginuser != null}">
+				<section class="replyForm">
+					<form method="post" role="form">
+						<input type="hidden" name="product_code" id="product_code"
+							value="${view.product_code}">
+						<div class="input_area" align="center">
+								<p id="star_grade">
+									<a id="star1">★</a> <a id="star2">★</a> <a id="star3">★</a> <a
+										id="star4">★</a> <a id="star5">★</a>
+								</p>
+								<input type="hidden" name="rating" id="rating">
+							<div class="input-group">
+								<textarea class="form-control" aria-label="With textarea" name="revcon" id="revcon" style="resize: none; width: 600px;"></textarea>
+								<button id="revbtn" type="button">리뷰 작성</button>
+							</div>
+							
+							<script>
+								$("#revbtn").click(function(){  
+									var formObj = $(".replyForm form[role='form']");
+									var product_code = $("#product_code").val();
+									var revcon = $("#revcon").val()
+									var rating = $("#rating").val()
+									  
+									var data = {
+										product_code : product_code,
+										revcon : revcon,
+										rating : rating
+									};
+									  
+									$.ajax({
+										url : "${cpath}/detail/registReview",
+										type : "post",
+										data : data,
+										success : function(){
+											reviewList();
+											$("#revcon").val("");
+										}
+									});
+								});
+								
+								$('#star_grade a').click(function(){
+						            $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+						            $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+						        });
+						        
+						        $('#star1').click(function(){
+						        	$("#rating").val(1);
+						        });
+						        $('#star2').click(function(){
+						        	$("#rating").val(2);
+						        });
+						        $('#star3').click(function(){
+						        	$("#rating").val(3);
+						        });
+						        $('#star4').click(function(){
+						        	$("#rating").val(4);
+						        });
+						        $('#star5').click(function(){
+						        	$("#rating").val(5);
+						        });
+							</script>
+						</div>
+					</form>
+				</section>
+			</c:if>
+
+			<section class="replyList">
+				<ol></ol>
+				
+				<script>reviewList();</script>
+				
+				<script>
+					$(document).on("click", ".modify", function(){
+						$(".reviewModal").fadeIn(200);
+					 
+						var revnum = $(this).attr("data-revnum");
+						var revcon = $(this).parent().parent().children(".reviewContent").text();
+					 
+						$(".modal_revcon").val(revcon);
+						$(".modal_modify_btn").attr("data-revnum", revnum)
+					});
+
+					$(document).on("click", ".delete", function(){
+						var deleteConfirm = confirm("정말로 삭제 하시겠습니까?");
+					  
+						if(deleteConfirm) {
+							var data = {revnum : $(this).attr("data-revnum")};
+							   
+							$.ajax({
+								url : "${cpath}/detail/deleteReview",
+								type : "post",
+								data : data,
+								success : function(){								
+									reviewList();
+								}
+							});
+						}
+					});
+				</script>
+			</section>
+		</div>
+
+		<div id="fn3"></div>
+		<div class="reply">
+			<input type="hidden" id="product_code" value="${view.product_code }">
+			<input type="hidden" id="product_name" value="${view.product_name }">
+			<input type="hidden" id="userid" value="${loginuser.userid }">
+
+			<h3 style="display: inline;">문의</h3>
+			<section class="replyForm" id="prod-inquiry-list__emphasis">
+				<c:if test="${loginuser == null }">
+					<p style="float: right">
+						문의를 남기시려면 <a href="login?next=/detail?n=${view.product_code}">로그인</a>해주세요.
+					</p>
+				</c:if>
+				<c:if test="${loginuser != null }">
+					<button onclick="openChild()" id="replybtn">문의하기</button>
+				</c:if>
+				<div class="inquiry">
+					<ul>
+						<li style="width:100%">구매한 상품의 <em>취소/반품은 마이페이지 구매내역에서 신청</em> 가능합니다.</li>
+						<li style="width:100%">상품문의 및 후기게시판을 통해 취소나 환불, 반품 등은 처리되지 않습니다.</li>
+						<li style="width:100%"><em>가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는 문의는 고객센터 내 1:1 문의하기</em>를 이용해주세요.</li>
+						<li style="width:100%"><em>"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수 있습니다.</em></li>
+						<li style="width:100%">공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대 남기지 말아주세요.</li>
+					</ul>
+				</div>
+			</section>
+			<section class="replyList">
+				<c:if test="${not empty inquiry }">
+					<c:forEach items="${inquiry }" var="inquiry">
+						<c:if test="${not empty inquiry.question }">
+							<div class='userInfo'>
+								<span class='userName'>${inquiry.category }문의</span> 
+								<span>(<b>${inquiry.userid }</b>)</span>
+								<span class='date'><fmt:formatDate pattern="yyyy. MM. dd"
+							value="${inquiry.cdate }" /></span>
+							</div>
+							<div class='replyContent'>
+								${inquiry.question }
+							</div>
+						</c:if>
+						<c:if test="${not empty inquiry.answer }">
+							<div style="background-color: #d3d3d3">
+								→ 답변: ${inquiry.answer }
+							</div>
+						</c:if>
+						<hr style="border-bottom: 2px solid #eee;">
+					</c:forEach>
+				</c:if>
+			</section>
+		</div>
+	</section>
+</div>
+</section>
+
+<!-- homeController에서 팝업을 뜨게 만들어줌 -->
+<!-- 팝업 안 내용들은 inquiry.jsp 확인 -->
+<script type="text/javascript">
+	function openChild(){
+		var openWin;
+        openWin = window.open("inquiry","", "width=600, height=475, resizable = no, scrollbars = no");
+        openWin.focus();
+	}
+</script>
+
+<div class="reviewModal">
+	<div class="modalContent">
+		<div id="privacy">
+		<div id="agreeInner">
+		<div style="width:100%;">
+			<p id="star_grade">
+				<a id="star11">★</a> 
+				<a id="star22">★</a> 
+				<a id="star33">★</a> 
+				<a id="star44">★</a> 
+				<a id="star55">★</a>
+			</p>
+			<input type="hidden" name="rating" id="rating2">
+			<textarea class="modal_revcon" name="modal_revcon" style="resize:none;"></textarea>
+		</div>
+		<div style="width:100%;">
+			<button type="button" class="modal_modify_btn">수정</button>
+			<button type="button" class="modal_cancel">취소</button>
+		</div>
+		</div>
+		</div>
+	</div>
+	<div class="modalBackground"></div>
+</div>
+
+<script>
+	$(".modal_modify_btn").click(function(){
+		var modifyConfirm = confirm("정말로 수정하시겠습니까?");
+		 
+		if(modifyConfirm) {
+			var data = {
+				revnum : $(this).attr("data-revnum"),
+				revcon : $(".modal_revcon").val(),
+				rating : $("#rating2").val()
+			}; // ReviewVO 형태로 데이터 생성
+			
+			$.ajax({
+				url : "${cpath}/detail/modifyReview",
+				type : "post",
+				data : data,
+				success : function(result){
+					reviewList();
+					$(".reviewModal").fadeOut(200);
+				}
+			});
+		}
+	});
+	
+	$(".modal_cancel").click(function() {
+		$(".reviewModal").fadeOut(200);
+	});
+	
+    $('#star_grade a').click(function(){
+        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+    });
+    
+    $('#star11').click(function(){
+    	$("#rating2").val(1);
+    });
+    $('#star22').click(function(){
+    	$("#rating2").val(2);
+    });
+    $('#star33').click(function(){
+    	$("#rating2").val(3);
+    });
+    $('#star44').click(function(){
+    	$("#rating2").val(4);
+    });
+    $('#star55').click(function(){
+    	$("#rating2").val(5);
+    });
+</script>
+<%@ include file="/common/footer.jsp"%>
+ --@>

@@ -1,0 +1,196 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/include/header.jsp"%>
+<%@ include file="/include/carringInOutByPeriodStatusNav.jsp"%>
+<section>
+	<div align="center" class="sectionform">
+		<h3>요일별 반출입 현황${getunit }</h3>
+		<br>
+		<form method="post" id="searchOption">
+			<div id="yymmdd" style="width: auto;">
+				<div class="input-group mb-3" id="dateinput1">
+					<input type="text" class="form-control" name="txtFromYear"
+						id="txtFromYear" value="${fromDate[0] }">
+					<div class="input-group-append">
+						<span class="input-group-text">년</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtFromMonth"
+						id="txtFromMonth" value="${fromDate[1] }">
+					<div class="input-group-append">
+						<span class="input-group-text">월</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtFromDay"
+						id="txtFromDay" value="${fromDate[2] }">
+					<div class="input-group-append">
+						<span class="input-group-text">일</span>
+					</div>
+
+					<input type="hidden" class="form-control" name="txtFromTime"
+						id="txtFromDay" value="00">
+				</div>
+				<span id="tilde">~</span>
+				<div class="input-group mb-3" id="dateinput2">
+					<input type="text" class="form-control" name="txtToYear"
+						id="txtToYear" value="${toDate[0] }">
+					<div class="input-group-append">
+						<span class="input-group-text">년</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtToMonth"
+						id="txtToMonth" value="${toDate[1] }">
+					<div class="input-group-append">
+						<span class="input-group-text">월</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtToDay"
+						id="txtToDay" value="${toDate[2] }">
+					<div class="input-group-append">
+						<span class="input-group-text">일</span>
+					</div>
+
+					<input type="hidden" class="form-control" name="txtToTime"
+						id="txtToDay" value="00">
+				</div>
+			</div>
+			
+			<div class="input-group mb-3" id="inputCheckbox">
+				<span id="checkboxFont">TS</span>
+				<input type="checkbox" class="form-control" name="ts" id="ts" value="ts">
+			</div>
+			
+			<div class="carringInOutOption">
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="imexportInput">
+						<div class="input-group-append">
+							<span class="input-group-text">I/X</span>
+						</div>
+						<select name="imexport" id="slctImExport" class="form-control">
+							<option id="imexport" value="all">*</option>
+							<option id="imexport" value="i">수입</option>
+							<option id="imexport" value="x">수출</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="fmInput">
+						<div class="input-group-append">
+							<span class="input-group-text">F/M</span>
+						</div>
+						<select name="fm" id="slctFM" class="form-control">
+							<option id="fm" value="all">*</option>
+							<option id="fm" value="f">FULL</option>
+							<option id="fm" value="m">EMPTY</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="sizeInput">
+						<div class="input-group-append">
+							<span class="input-group-text">Size</span>
+						</div>
+						<select name="size" id="slctSize" class="form-control">
+							<option id="size" value="all">*</option>
+							<option id="size" value="20">20</option>
+							<option id="size" value="40">40</option>
+							<option id="size" value="45">45</option>
+							<option id="size" value="HC">HC</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="typeInput">
+						<div class="input-group-append">
+							<span class="input-group-text">Type</span>
+						</div>
+						<select name="type" id="slctType" class="form-control">
+							<option id="type" value="all">*</option>
+							<option id="type" value="DC">DC</option>
+							<option id="type" value="RF">RF</option>
+							<option id="type" value="OT">OT</option>
+							<option id="type" value="PL">PL</option>
+							<option id="type" value="TK">TK</option>
+							<option id="type" value="BK">BK</option>
+							<option id="type" value="AS">AS</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="unitInput">
+						<div class="input-group-append">
+							<span class="input-group-text">단위</span>
+						</div>
+						<select name="unit" id="slctUnit" class="form-control">
+							<option id="unit" value="van">VAN</option>
+							<option id="unit" value="teu">TEU</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<button type="submit" id="searchBtn" class="searchBtn2" formaction="${cpath }/carringInOutByDay">검색</button>
+		</form>
+	</div>
+	<br>
+	<div align="center">
+		<table class="table table-hover" id="resultTbl">
+			<thead>
+				<tr>
+					<th scope="col" style="width: 82px;">구분</th>
+					<c:forEach var="i" begin="1" end="${endday }" step="1" >
+						<th scope="col">${i}</th>
+					</c:forEach>
+					<th scope="col">합계</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="item" items="${data }">   
+					<tr>
+				      <th scope="row">${item.gubun }</th>
+				      <td>${item.sunday }</td>
+				      <td>${item.monday }</td>
+				      <td>${item.tuesday }</td>
+				      <td>${item.wednesday }</td>
+				      <td>${item.thursday }</td>
+				      <td>${item.friday }</td>
+				      <td>${item.saturday }</td>
+				      <td>${item.tot }</td>
+				    </tr>
+				</c:forEach>
+				<c:if test="${flag eq 'fail' }">
+					<th colspan="9" scope="row" style="text-align: center;">날짜 형식이 잘 못 되었습니다.</th>
+				</c:if>
+				<c:if test="${data == null && flag != 'fail'}">
+					<th colspan="9" scope="row" style="text-align: center;">조회 할 기간을 입력하세요.</th>
+				</c:if>
+			</tbody>
+		</table>
+	</div>
+	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+		google.charts.load('current', {'packages':['corechart'] }  );
+	    
+	    google.charts.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	        var data = google.visualization.arrayToDataTable([
+	        	${str }	
+	        ]);
+	
+	        var options = {
+	        	title: '요일별 반출입 현황'
+	        };
+	
+	        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+	
+	        chart.draw(data, options);
+	    }
+    </script>
+    <div id="chart_div" align="center"></div>
+</section>
+</body>
+</html>

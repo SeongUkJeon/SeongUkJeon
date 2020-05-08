@@ -1,0 +1,18 @@
+package com.dbinc.pgm.vo;
+
+public class BoardVO {
+	private String cntrno;
+
+	public String getCntrno() {
+		return cntrno;
+	}
+
+	public void setCntrno(String cntrno) {
+		this.cntrno = cntrno;
+	}
+	
+	@Override
+	public String toString() {
+		return "BoardVO [cntrno=" + cntrno + "]";
+	}
+}

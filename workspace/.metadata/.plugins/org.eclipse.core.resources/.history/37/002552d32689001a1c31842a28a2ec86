@@ -1,0 +1,10 @@
+package com.dbinc.pgm.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.dbinc.pgm.service.CarringInOutByPeriodStatusService;
+
+@Service("carringInOutByPeriodStatusService")
+public class CarringInOutByPeriodStatusServiceImpl implements CarringInOutByPeriodStatusService {
+
+}

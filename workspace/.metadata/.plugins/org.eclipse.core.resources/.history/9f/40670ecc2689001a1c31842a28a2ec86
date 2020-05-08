@@ -1,0 +1,10 @@
+package com.dbinc.pgm.service;
+
+import java.util.List;
+
+import com.dbinc.pgm.vo.CarringInOutByTimeVO;
+import com.dbinc.pgm.vo.CarringInOutSearchVO;
+
+public interface CarringInOutByPeriodStatusService {
+	List<CarringInOutByTimeVO> carringInOutByTime(CarringInOutSearchVO vo);
+}

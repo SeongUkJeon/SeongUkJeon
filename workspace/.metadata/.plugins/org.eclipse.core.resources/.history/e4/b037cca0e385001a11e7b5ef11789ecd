@@ -1,0 +1,9 @@
+package com.dbinc.pgm.service;
+
+import java.util.List;
+
+import com.dbinc.pgm.vo.BoardVO;
+
+public interface OperCdService {
+	List<BoardVO> selectOperCdList() throws Exception;
+}

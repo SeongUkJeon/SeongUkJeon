@@ -1,0 +1,33 @@
+1587623757545	Move 'dao' to 'pgm'
+1587623764006	Delete element
+1587623769594	Delete element
+1587623776695	Move 'dao' to 'service'
+1587623823368	Move 'BoardVO.java' to 'vo'
+1587627314756	Delete element
+1587689606287	Delete element
+1587689737060	Move 'images' to 'resources'
+1587689739151	Move folder
+1587689743409	Move 'js' to 'resources'
+1587693124387	Delete element
+1587696440245	Delete element
+1587696648099	Delete element
+1587700775728	Delete element
+1587701965248	Rename type 'BoardService'
+1587702025286	Rename type 'BoardServiceImpl'
+1587702035641	Rename type 'operCdService'
+1587702155753	Rename compilation unit 'BoardDAO.java'
+1587702519643	Rename resource 'Tb_Board_SQL.xml'
+1587702738028	Rename resource 'boardList.jsp'
+1587703508824	Delete element
+1587709862340	Rename type 'BoardVO'
+1587711202789	Rename type 'OperCdService'
+1587711220244	Rename type 'OperCdServiceImpl'
+1587711239834	Rename type 'JobTotalService'
+1587711275069	Rename type 'OperCdDAO'
+1587711654548	Copy file
+1587713055103	Delete element
+1587713060224	Delete element
+1587713065697	Delete element
+1587713080852	Delete element
+1587713089139	Delete element
+1587713093646	Delete element

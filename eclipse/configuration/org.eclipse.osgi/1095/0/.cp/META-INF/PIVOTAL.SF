@@ -1,0 +1,30 @@
+Signature-Version: 1.0
+SHA-256-Digest-Manifest-Main-Attributes: VYPHc/4GZdgGR74RBoPvYcjFhwHa0
+ MDXHDsjLs46Irc=
+SHA-256-Digest-Manifest: iaVKcEPhAKqQ8Y2d81T0C+jjtxv9Ca1pWGUp+Xdp1iI=
+Created-By: 1.8.0_212 (AdoptOpenJDK)
+
+Name: about.html
+SHA-256-Digest: Q1W31rtmZZqcnc6fAMFrZoQucyPa2erL7cRSHaZhYyQ=
+
+Name: plugin.xml
+SHA-256-Digest: RKUVdO04vlU855YQmK+8Aq8FTxm23UAZrq0p5mxg+GY=
+
+Name: intro/images/springide.png
+SHA-256-Digest: RJPQ/L/IVs/8o4p+f03bUFOFdTWHShLphYBLlF0aVdI=
+
+Name: intro/css/overview.css
+SHA-256-Digest: 8QiNHSDeWka7a4NZIGrd1nB03fhyKp5+XYIhucpppgQ=
+
+Name: intro/overview.xml
+SHA-256-Digest: By98zol0esd4ddib4ujqywPpOI9UcOhaYhRAb/5FGgM=
+
+Name: toc.xml
+SHA-256-Digest: WibPW0kIORcUQuWOdRsK53V6AYWtjYEwM8Ei+iTmVLc=
+
+Name: intro/css/overview.properties
+SHA-256-Digest: hm+K19NWaSJtmvXMI7TKZp4R4fS7WIimZ+/nDmaUr5s=
+
+Name: plugin.properties
+SHA-256-Digest: qla4VFsSETg/P0ZSH94gEUj731OZjV3YAyhynzSRBfs=
+

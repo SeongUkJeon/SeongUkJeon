@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbinc.pgm.service.dao.JobTotalDAO">
+	<select id="selectDailyJobStatus" parameterType="JobTotalSearchVO" resultType="DailyJobStatusVO"> 
+		select num,
+		       sum(decode(fm_cd || substr(sz_cd, 1, 1), 'F2', 1, 0)) F20,
+		       sum(decode(fm_cd || substr(sz_cd, 1, 1), 'F4', 1, 0)) F40,
+		       sum(decode(fm_cd || substr(sz_cd, 1, 1), 'F9', 1, 'FL', 1, 0)) F45,
+		       sum(decode(fm_cd || substr(sz_cd, 1, 1), 'M2', 1, 0)) M20,
+		       sum(decode(fm_cd || substr(sz_cd, 1, 1), 'M4', 1, 0)) M40,
+		       sum(decode(fm_cd || substr(sz_cd, 1, 1), 'M9', 1, 'ML', 1, 0)) M45,
+		       sum(decode(substr(sz_cd, 1, 1) || 야간, '2NG', 1, 0)) ng20,
+		       sum(decode(substr(sz_cd, 1, 1) || 야간, '4NG', 1, 0)) ng40,
+		       sum(decode(substr(sz_cd, 1, 1) || 야간, '9NG', 1, 'LNG', 1, 0)) ng45,
+		       sum(decode(substr(sz_cd, 1, 1),
+		                  '2',
+		                  decode(trim(temp), null, 0, 1),
+		                  0)) rf20,
+		       sum(decode(substr(sz_cd, 1, 1),
+		                  '2',
+		                  0,
+		                  decode(trim(temp), null, 0, 1))) rf40,
+		       sum(decode(substr(sz_cd, 1, 1),
+		                  '2',
+		                  decode(trim(imdg), null, 0, 1),
+		                  0)) dg20,
+		       sum(decode(substr(sz_cd, 1, 1),
+		                  '2',
+		                  0,
+		                  decode(trim(imdg), null, 0, 1))) dg40,
+		       sum(decode(substr(sz_cd, 1, 1),
+		                  '2',
+		                  decode(trim(hwl_cd), null, 0, '0', 0, 1),
+		                  0)) sp20,
+		       sum(decode(substr(sz_cd, 1, 1),
+		                  '2',
+		                  0,
+		                  decode(trim(hwl_cd), null, 0, '0', 0, 1))) sp40,
+		       sum(decode(substr(sz_cd, 1, 1),
+		                  '2',
+		                  decode(trim(bond_id), null, 0, 1),
+		                  0)) bo20,
+		       sum(decode(substr(sz_cd, 1, 1),
+		                  '2',
+		                  0,
+		                  decode(trim(bond_id), null, 0, 1))) bo40,
+		       count(*) van,
+		       sum(decode(substr(sz_cd, 1, 1), '2', 1, 2)) teu
+		  from (select '3' num,
+		               cntr_no,
+		               dup_no,
+		               ship_cd,
+		               call_yy,
+		               call_no,
+		               oper_cd,
+		               ts_id,
+		               cur_stat,
+		               ' ' rtn_cd,
+		               fm_cd,
+		               sz_cd,
+		               temp,
+		               imdg,
+		               hwl_cd,
+		               shift_tm,
+		               bond_id,
+		               to_char(gin_dt, 'yyyy/mm/dd') wk_date,
+		               '1' 구분,
+		               ' ' 야간,
+		               y_tblock
+		          from t_cntr
+		         where gin_dt between to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDDHH24') and
+		               to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDDHH24') + 1 and
+		               trn_in in ('D', 'C') and trn_in != 'A'
+		        union all
+		          select decode(nvl(rtn_cd, ' '), 'R', '5', '4') num,
+		                 cntr_no,
+		                 dup_no,
+		                 ship_cd,
+		                 call_yy,
+		                 call_no,
+		                 oper_cd,
+		                 ts_id,
+		                 cur_stat,
+		                 rtn_cd,
+		                 fm_cd,
+		                 sz_cd,
+		                 temp,
+		                 imdg,
+		                 hwl_cd,
+		                 shift_tm,
+		                 bond_id,
+		                 to_char(gout_dt, 'yyyy/mm/dd') wk_date,
+		                 '2' 구분,
+		                 ' ' 야간,
+		                 y_tblock
+		            from t_cntr
+		           where gout_dt between to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDDHH24') and
+		                 to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDDHH24') + 1 and
+		                 trn_out in ('D', 'C') and trn_out != 'A'
+		          union all
+		            SELECT '6' num,
+		                   a.cntr_no,
+		                   a.dup_no,
+		                   a.ship_cd,
+		                   a.call_yy,
+		                   a.call_no,
+		                   a.oper_cd,
+		                   a.ts_id,
+		                   a.cur_stat,
+		                   a.rtn_cd,
+		                   a.fm_cd,
+		                   a.sz_cd,
+		                   a.temp,
+		                   a.imdg,
+		                   a.hwl_cd,
+		                   a.shift_tm,
+		                   a.bond_id,
+		                   to_char(B.F_WK_DT, 'yyyy/mm/dd') wk_date,
+		                   '5' 구분,
+		                   ' ' 야간,
+		                   'T' y_tblock
+		              FROM t_cntr                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        a,
+		                   (SELECT CNTR_NO,
+		                           DUP_NO,
+		                           F_WK_CD,
+		                           F_WK_DT,
+		                           F_YARD_LOC,
+		                           T_WK_CD,
+		                           T_WK_DT,
+		                           T_YARD_LOC
+		                      FROM (SELECT A.CNTR_NO,
+		                                   A.DUP_NO,
+		                                   A.WK_CD F_WK_CD,
+		                                   A.WK_DT F_WK_DT,
+		                                   A.YARD_LOC F_YARD_LOC,
+		                                   B.WK_CD T_WK_CD,
+		                                   B.WK_DT T_WK_DT,
+		                                   B.YARD_LOC T_YARD_LOC,
+		                                   RANK() OVER(PARTITION BY A.CNTR_NO, A.DUP_NO, A.WK_CD, A.WK_DT, A.YARD_LOC, B.WK_CD ORDER BY B.WK_DT ASC) RNK
+		                              FROM T_TCLOG A, T_TCLOG B
+		                             WHERE A.CNTR_NO = B.CNTR_NO AND
+		                                   A.DUP_NO = B.DUP_NO AND A.WK_CD = 'B' AND
+		                                   A.IM_CD IS NULL AND B.WK_CD = 'E' AND
+		                          		   A.WK_DT<![CDATA[<]]>B.WK_DT AND
+		                                   A.wk_dt between
+		                                   to_date(#{date }, 'YYYYMMDDHH24') and
+		                                   to_date(#{date }, 'YYYYMMDDHH24') + 1 AND
+		                                   B.wk_dt between
+		                                   to_date(#{date }, 'YYYYMMDDHH24') and
+		                                   to_date(#{date }, 'YYYYMMDDHH24') + 1)
+		                     WHERE RNK = 1) B
+		             WHERE a.cntr_no = b.cntr_no AND A.DUP_NO = B.DUP_NO and
+		                   (substr(b.f_yard_loc, 1, 1) not in ('S', 'V', 'D', 'R') or
+		                   substr(b.t_yard_loc, 1, 1) not in ('S', 'V', 'D', 'R'))
+		            union all
+		              select decode(nvl(ts_id, ' '), '1', '7', '2', '7', '1') num,
+		                     cntr_no,
+		                     dup_no,
+		                     c.ship_cd,
+		                     c.call_yy,
+		                     c.call_no,
+		                     c.oper_cd,
+		                     ts_id,
+		                     cur_stat,
+		                     rtn_cd,
+		                     fm_cd,
+		                     sz_cd,
+		                     temp,
+		                     imdg,
+		                     hwl_cd,
+		                     shift_tm,
+		                     bond_id,
+		                     to_char(gc_ddt, 'yyyy/mm/dd') wk_date,
+		                     '3' 구분,
+		                     decode(nvl(overd_cd,
+		                                ' 
+		 '),
+		                            '  ',
+		                            'DA',
+		                            'NG') 야간,
+		                     y_tblock
+		                from t_cntr c, t_vescall v
+		               where c.ship_cd = v.ship_cd and c.call_yy = v.call_yy and
+		                     c.call_no = v.call_no and
+		                     (v.ex_tmnl is null or
+		                     (v.ex_tmnl is not null and v.cancel_yn is null)) and
+		                     gc_ddt between to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDDHH24') and
+		                     to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDDHH24') + 1
+		              union all
+		                select decode(nvl(ts_id, ' ') ||
+		                              decode(trim(s_sind), null, ' ', trim(s_sind)),
+		                              '1 ',
+		                              '8',
+		                              '2 ',
+		                              '8',
+		                              ' H',
+		                              '9',
+		                              ' Y',
+		                              '10',
+		                              '2') num,
+		                       cntr_no,
+		                       dup_no,
+		                       c.ship_cd,
+		                       c.call_yy,
+		                       c.call_no,
+		                       c.oper_cd,
+		                       ts_id,
+		                       cur_stat,
+		                       rtn_cd,
+		                       fm_cd,
+		                       sz_cd,
+		                       temp,
+		                       imdg,
+		                       hwl_cd,
+		                       shift_tm,
+		                       bond_id,
+		                       to_char(gc_ldt, 'yyyy/mm/dd') wk_date,
+		                       '4' 구분,
+		                       decode(nvl(overl_cd, '  '), '  ', 'DA', 'NG') 야간,
+		                       y_tblock
+		                  from t_cntr c, t_vescall v
+		                 where c.ship_cd = v.ship_cd and c.call_yy = v.call_yy and
+		                       c.call_no = v.call_no and
+		                       (v.ex_tmnl is null or
+		                       (v.ex_tmnl is not null and v.cancel_yn is null)) and
+		                       gc_ldt between to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDDHH24') and
+		                       to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDDHH24') + 1
+		        )
+		 where oper_cd like #{operCd} and
+		       substr(y_tblock, 1, 1) not in ('S', 'V', 'D', 'R')
+		 group by num
+	</select>	
+	
+	<select id="selectMonthlyJobStatus" parameterType="SearchVO" resultType="MonthlyJobStatusVO"> 
+		select gubun,
+		       wk_date as wkdate,
+		       count(*) van,
+		       sum(decode(substr(sz_cd, 1, 1), '2', 1, 2)) teu
+		  from (select '1' gubun,
+		               to_char(gin_dt, 'yyyy/mm/dd') wk_date,
+		               sz_cd,
+		               fm_cd,
+		               y_tblock
+		          from t_cntr
+		         where gin_dt between to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDD') and
+		               to_date(#{date}, 'yyyymmdd') and trn_in in ('D', 'C') and
+		               substr(sz_cd, 1, 1) = '2'
+		        union all
+		          select '2' gubun,
+		                 to_char(gin_dt, 'yyyy/mm/dd') wk_date,
+		                 sz_cd,
+		                 fm_cd,
+		                 y_tblock
+		            from t_cntr
+		           where gin_dt between to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDD') and
+		                 to_date(#{date}, 'yyyymmdd') and trn_in in ('D', 'C') and
+		                 substr(sz_cd, 1, 1) <![CDATA[<>]]> '2'
+		          union all
+		            select '3' gubun,
+		                   to_char(gout_dt, 'yyyy/mm/dd') wk_date,
+		                   sz_cd,
+		                   fm_cd,
+		                   y_tblock
+		              from t_cntr where gout_dt between to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDD') and to_date(#{date}, 'yyyymmdd') and trn_out in ('D', 'C') and nvl(rtn_cd, ' ') <![CDATA[<>]]> 'R' and substr(sz_cd, 1, 1) = '2'
+		            union all
+		              select '4' gubun,
+		                     to_char(gout_dt, 'yyyy/mm/dd') wk_date,
+		                     sz_cd,
+		                     fm_cd,
+		                     y_tblock
+		                from t_cntr
+		               where gout_dt between to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDD') and
+		                     to_date(#{date}, 'yyyymmdd') and
+		                     trn_out in ('D', 'C') and nvl(rtn_cd, ' ') <![CDATA[<>]]> 'R' and
+		                     substr(sz_cd, 1, 1) <![CDATA[<>]]> '2'
+		              union all
+		                SELECT '5' gubun,
+		                       to_char(n.F_WK_DT, 'yyyy/mm/dd') wk_date,
+		                       m.sz_cd,
+		                       m.fm_cd,
+		                       'V' y_tblock
+		                  FROM T_CNTR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      M,
+		                       (SELECT A.CNTR_NO,
+		                               A.DUP_NO,
+		                               A.WK_CD F_WK_CD,
+		                               A.WK_DT F_WK_DT,
+		                               A.YARD_LOC F_YARD_LOC,
+		                               B.WK_CD T_WK_CD,
+		                               B.WK_DT T_WK_DT,
+		                               B.YARD_LOC T_YARD_LOC,
+		                               RANK() OVER(PARTITION BY A.CNTR_NO, A.DUP_NO, A.WK_CD, A.WK_DT, A.YARD_LOC, B.WK_CD ORDER BY B.WK_DT ASC) RNK
+		                          FROM T_TCLOG A, T_TCLOG B
+		                         WHERE A.CNTR_NO = B.CNTR_NO AND A.DUP_NO = B.DUP_NO AND
+		                               A.WK_CD = 'B' AND A.IM_CD IS NULL AND
+		                               B.WK_CD = 'E' AND
+		                               (B.WK_DT - A.WK_DT) * 24 * 60 * 60 = 1 AND
+		                               B.wk_dt between
+		                               to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDD') and
+		                               to_date(#{date}, 'yyyymmdd') AND
+		                               A.YARD_LOC = B.YARD_LOC) N
+		                 WHERE M.CNTR_NO = N.CNTR_NO AND M.DUP_NO = N.DUP_NO AND
+		                       N.RNK = 1 and substr(M.sz_cd, 1, 1) = '2'
+		                UNION ALL
+		                  SELECT '5' gubun,
+		                         to_char(n.F_WK_DT, 'yyyy/mm/dd') wk_date,
+		                         m.sz_cd,
+		                         m.fm_cd,
+		                         'V' y_tblock
+		                    FROM T_CNTR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               M,
+		                         (SELECT A.CNTR_NO,
+		                                 A.DUP_NO,
+		                                 A.WK_CD F_WK_CD,
+		                                 A.WK_DT F_WK_DT,
+		                                 A.YARD_LOC F_YARD_LOC,
+		                                 B.WK_CD T_WK_CD,
+		                                 B.WK_DT T_WK_DT,
+		                                 B.YARD_LOC T_YARD_LOC,
+		                                 RANK() OVER(PARTITION BY A.CNTR_NO, A.DUP_NO, A.WK_CD, A.WK_DT, A.YARD_LOC, B.WK_CD ORDER BY B.WK_DT ASC) RNK
+		                            FROM T_TCLOG A, T_TCLOG B
+		                           WHERE A.CNTR_NO = B.CNTR_NO AND
+		                                 A.DUP_NO = B.DUP_NO AND A.WK_CD = 'B' AND
+		                                 A.IM_CD IS NULL AND B.WK_CD = 'E' AND
+		                                 A.WK_DT <![CDATA[<]]> B.WK_DT AND
+		                                 A.wk_dt between
+		                                 to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDD') and
+		                                 to_date(#{date}, 'yyyymmdd') AND
+		                                 SUBSTR(A.YARD_LOC, 2, 1) IN ('D', 'V')) N
+		                   WHERE M.CNTR_NO = N.CNTR_NO AND M.DUP_NO = N.DUP_NO AND
+		                         N.RNK = 1 and substr(M.sz_cd, 1, 1) = '2'
+		                  union all
+		                    SELECT '6' gubun,
+		                           to_char(n.F_WK_DT, 'yyyy/mm/dd') wk_date,
+		                           m.sz_cd,
+		                           m.fm_cd,
+		                           'V' y_tblock
+		                      FROM T_CNTR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      M,
+		                           (SELECT A.CNTR_NO,
+		                                   A.DUP_NO,
+		                                   A.WK_CD F_WK_CD,
+		                                   A.WK_DT F_WK_DT,
+		                                   A.YARD_LOC F_YARD_LOC,
+		                                   B.WK_CD T_WK_CD,
+		                                   B.WK_DT T_WK_DT,
+		                                   B.YARD_LOC T_YARD_LOC,
+		                                   RANK() OVER(PARTITION BY A.CNTR_NO, A.DUP_NO, A.WK_CD, A.WK_DT, A.YARD_LOC, B.WK_CD ORDER BY B.WK_DT ASC) RNK
+		                              FROM T_TCLOG A, T_TCLOG B
+		                             WHERE A.CNTR_NO = B.CNTR_NO AND
+		                                   A.DUP_NO = B.DUP_NO AND A.WK_CD = 'B' AND
+		                                   A.IM_CD IS NULL AND B.WK_CD = 'E' AND
+		                                   (B.WK_DT - A.WK_DT) * 24 * 60 * 60 = 1 AND
+		                                   B.wk_dt between
+		                                   to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDD') and
+		                                   to_date(#{date}, 'yyyymmdd') AND
+		                                   A.YARD_LOC = B.YARD_LOC) N
+		                     WHERE M.CNTR_NO = N.CNTR_NO AND M.DUP_NO = N.DUP_NO AND
+		                           N.RNK = 1 and substr(M.sz_cd, 1, 1) <![CDATA[<>]]> '2'
+		                    UNION ALL
+		                      SELECT '6' gubun,
+		                             to_char(n.F_WK_DT, 'yyyy/mm/dd') wk_date,
+		                             m.sz_cd,
+		                             m.fm_cd,
+		                             'V' y_tblock
+		                        FROM T_CNTR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               M,
+		                             (SELECT A.CNTR_NO,
+		                                     A.DUP_NO,
+		                                     A.WK_CD F_WK_CD,
+		                                     A.WK_DT F_WK_DT,
+		                                     A.YARD_LOC F_YARD_LOC,
+		                                     B.WK_CD T_WK_CD,
+		                                     B.WK_DT T_WK_DT,
+		                                     B.YARD_LOC T_YARD_LOC,
+		                                     RANK() OVER(PARTITION BY A.CNTR_NO, A.DUP_NO, A.WK_CD, A.WK_DT, A.YARD_LOC, B.WK_CD ORDER BY B.WK_DT ASC) RNK
+		                                FROM T_TCLOG A, T_TCLOG B
+		                               WHERE A.CNTR_NO = B.CNTR_NO AND
+		                                     A.DUP_NO = B.DUP_NO AND A.WK_CD = 'B' AND
+		                                     A.IM_CD IS NULL AND B.WK_CD = 'E' AND
+		                                     A.WK_DT <![CDATA[<]]> B.WK_DT AND
+		                                     A.wk_dt between
+		                                     to_date(#{txtYear} || #{txtMonth} || #{txtDay}, 'YYYYMMDD') and
+		                                     to_date(#{date}, 'yyyymmdd') AND
+		                                     SUBSTR(A.YARD_LOC, 2, 1) IN ('D', 'V')) N
+		                       WHERE M.CNTR_NO = N.CNTR_NO AND M.DUP_NO = N.DUP_NO AND
+		                             N.RNK = 1 and substr(M.sz_cd, 1, 1) <![CDATA[<>]]> '2'
+		        )
+		 where substr(y_tblock, 2, 1) in ('V', 'D')
+		 group by gubun, wk_date
+		 order by wk_date
+	</select>	
+</mapper>
+

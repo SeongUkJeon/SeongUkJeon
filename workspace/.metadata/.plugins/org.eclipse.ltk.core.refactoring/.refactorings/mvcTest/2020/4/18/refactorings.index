@@ -1,0 +1,13 @@
+1587953419684	Rename resource 'header'
+1587953564784	Move 'jobTotal.jsp' to 'jobTotal'
+1587953570306	Rename resource 'jobTotal.jsp'
+1587953620091	Rename resource 'nav.jsp'
+1587963473254	Rename type 'DailyInstallSearchVO'
+1588038042175	Move compilation unit
+1588040833961	Rename type 'carringInOutByPeriodStatusController'
+1588040947126	Delete element
+1588047333239	Copy file
+1588047361029	Rename resource 'yardInstallStatus.jsp'
+1588059862145	Rename resource 'timeCarringInOut.jsp'
+1588060007046	Rename type 'SearchVO'
+1588142010520	Rename type 'FunctionClass'

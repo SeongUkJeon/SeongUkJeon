@@ -1,0 +1,10 @@
+MDIMain = 0, 0, 1334, 496, , 225, 225, 1559, 721, C
+modCodeGenerator2 = 0, 0, 1334, 496, 
+MainFunction = 125, 125, 1459, 621, 
+Declaration = 50, 50, 1384, 546, 
+AccessControl = 50, 50, 1384, 546, 
+frmTotal = 75, 75, 1409, 571, , 0, 0, 1334, 496, C
+frmMain = 125, 125, 1461, 623, , 100, 100, 1436, 598, C
+ComboTxtFunction = 150, 150, 1486, 648, 
+bshfunction = 150, 150, 1486, 648, 
+frmTerm = 225, 225, 1536, 755, Z, 0, 0, 1361, 419, C

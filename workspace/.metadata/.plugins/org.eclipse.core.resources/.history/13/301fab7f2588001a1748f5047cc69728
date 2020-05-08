@@ -1,0 +1,20 @@
+package com.dbinc.pgm;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+public class FunctionClass {
+	List<Integer> getDate() {
+		List<Integer> date = new ArrayList<Integer>();
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(cal.YEAR);
+		int month = cal.get(cal.MONTH) + 1;
+		int day = cal.get(cal.DATE);
+		/* 현재 (시,분,초)
+		 * int hour = cal.get ( cal.HOUR_OF_DAY ) ;
+		 * int min = cal.get ( cal.MINUTE );
+		 * int sec = cal.get ( cal.SECOND );
+		 */
+	}
+}

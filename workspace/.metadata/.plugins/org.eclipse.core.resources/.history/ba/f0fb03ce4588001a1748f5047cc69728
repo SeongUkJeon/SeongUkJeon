@@ -1,0 +1,39 @@
+package com.dbinc.pgm.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.dbinc.pgm.service.JobTotalService;
+import com.dbinc.pgm.service.dao.JobTotalDAO;
+import com.dbinc.pgm.vo.DailyInstallResultVO;
+import com.dbinc.pgm.vo.DailyJobStatusVO;
+import com.dbinc.pgm.vo.OperCdVO;
+import com.dbinc.pgm.vo.SearchVO;
+
+@Service("jobTotalService")
+public class JobTotalServiceImpl implements JobTotalService {
+	@Autowired
+	private JobTotalDAO jobTotalDAO;
+
+	@Override
+	@Transactional
+	public List<OperCdVO> selectOperCdList() throws Exception {
+		return jobTotalDAO.selectOperCdList();
+	}
+
+	@Override
+	public List<DailyInstallResultVO> selectDailyInstallList(SearchVO vo) throws Exception {
+		return jobTotalDAO.selectDailyInstallList(vo);
+	}
+
+	@Override
+	public List<DailyJobStatusVO> dailyJobStatus(SearchVO vo) throws Exception {
+		vo.setDate(vo.getTxtYear() + vo.getTxtMonth() + vo.getTxtDay());
+		System.out.println(vo.getDate());
+		if(vo.getOperCd().equals("all"))
+		return jobTotalDAO.selectDailyJobStatus(vo);
+	}
+}

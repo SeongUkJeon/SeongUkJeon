@@ -1,0 +1,5 @@
+package com.dbinc.pgm.service.dao;
+
+public class CarringInOutByPeriodStatusDAO {
+
+}

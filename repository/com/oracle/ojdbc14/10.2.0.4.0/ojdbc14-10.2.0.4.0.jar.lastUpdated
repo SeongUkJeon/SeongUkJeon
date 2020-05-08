@@ -1,0 +1,10 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Apr 23 15:04:47 KST 2020
+http\://maven.jahia.org/maven2/.lastUpdated=1587621887555
+http\://repo1.maven.org/maven2/.error=Could not transfer artifact com.oracle\:ojdbc14\:jar\:10.2.0.4.0 from/to mvn2 (http\://repo1.maven.org/maven2/)\: Failed to transfer http\://repo1.maven.org/maven2/com/oracle/ojdbc14/10.2.0.4.0/ojdbc14-10.2.0.4.0.jar. Error code 501, HTTPS Required
+@default-mvn2-http\://repo1.maven.org/maven2/.lastUpdated=1587621352233
+https\://repo.maven.apache.org/maven2/.lastUpdated=1587621209662
+http\://mesir.googlecode.com/svn/trunk/mavenrepo/.error=
+http\://maven.jahia.org/maven2/.error=
+http\://mesir.googlecode.com/svn/trunk/mavenrepo/.lastUpdated=1587621352489
+https\://repo.maven.apache.org/maven2/.error=

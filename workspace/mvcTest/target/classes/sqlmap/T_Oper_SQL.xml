@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbinc.pgm.service.dao.JobTotalDAO">
+
+	<select id="selectOperCdList" resultType="OperCdVO"> 
+		SELECT oper_cd as opercd
+		  FROM t_oper 
+	  ORDER BY oper_cd
+	</select>	
+
+</mapper>

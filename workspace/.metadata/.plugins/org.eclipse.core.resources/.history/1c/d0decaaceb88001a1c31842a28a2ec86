@@ -1,0 +1,9 @@
+package com.dbinc.pgm;
+
+import java.sql.Date;
+
+public class MonthlyJobStatusVO {
+	int gubun;
+	Date wkdate;
+	int van, teu;
+}

@@ -1,0 +1,14 @@
+package com.dbinc.pgm.vo;
+
+public class BoardVO {
+	private String ixcd;
+	private int f2, f4, f5, m2, m4, m5, rf2, rf4, im2, im4, ak2, ak4, van, teu;
+	
+	
+
+	@Override
+	public String toString() {
+		return "BoardVO [ix_cd=" + ix_cd + "]";
+	}
+
+}

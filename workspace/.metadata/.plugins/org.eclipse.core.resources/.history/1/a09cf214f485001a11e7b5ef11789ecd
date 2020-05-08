@@ -1,0 +1,7 @@
+package com.dbinc.pgm.vo;
+
+public class DailyInstallSearchVO {
+	String txtYear, txtMonth, txtDay;
+	String operCd;
+	
+}

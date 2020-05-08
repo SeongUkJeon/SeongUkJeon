@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="OperCdVO" type="com.dbinc.pgm.vo.OperCdVO" />
+		<typeAlias alias="JobTotalSearchVO" type="com.dbinc.pgm.vo.JobTotalSearchVO"/>
+		<typeAlias alias="DailyInstallResultVO" type="com.dbinc.pgm.vo.DailyInstallResultVO"/>
+		<typeAlias alias="DailyJobStatusVO" type="com.dbinc.pgm.vo.DailyJobStatusVO"/>
+		<typeAlias alias="MonthlyJobStatusVO" type="com.dbinc.pgm.vo.MonthlyJobStatusVO"/>
+		<typeAlias alias="CarringInOutSearchVO" type="com.dbinc.pgm.vo.CarringInOutSearchVO"/>
+		<typeAlias alias="CarringInOutByTimeVO" type="com.dbinc.pgm.vo.CarringInOutByTimeVO"/>
+		<typeAlias alias="CarringInOutByDayVO" type="com.dbinc.pgm.vo.CarringInOutByDayVO"/>
+	</typeAliases>
+</configuration>

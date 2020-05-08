@@ -1,0 +1,322 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/include/header.jsp"%>
+<%@ include file="/include/carringInOutByPeriodStatusNav.jsp"%>
+<section>
+	<div align="center" class="sectionform">
+		<h3>시간대별 반출입 현황</h3>
+		<br>
+		<form method="post" id="searchOption">
+			<div id="yymmdd" style="width: auto;">
+				<div class="input-group mb-3" id="dateinput1">
+					<input type="text" class="form-control" name="txtFromYear"
+						id="txtFromYear" value="${fromDate[0] }">
+					<div class="input-group-append">
+						<span class="input-group-text">년</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtFromMonth"
+						id="txtFromMonth" value="${fromDate[1] }">
+					<div class="input-group-append">
+						<span class="input-group-text">월</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtFromDay"
+						id="txtFromDay" value="${fromDate[2] }">
+					<div class="input-group-append">
+						<span class="input-group-text">일</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtFromTime"
+						id="txtFromDay" value="00">
+					<div class="input-group-append">
+						<span class="input-group-text">시</span>
+					</div>
+				</div>
+				<span id="tilde">~</span>
+				<div class="input-group mb-3" id="dateinput2">
+					<input type="text" class="form-control" name="txtToYear"
+						id="txtToYear" value="${toDate[0] }">
+					<div class="input-group-append">
+						<span class="input-group-text">년</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtToMonth"
+						id="txtToMonth" value="${toDate[1] }">
+					<div class="input-group-append">
+						<span class="input-group-text">월</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtToDay"
+						id="txtToDay" value="${toDate[2] }">
+					<div class="input-group-append">
+						<span class="input-group-text">일</span>
+					</div>
+
+					<input type="text" class="form-control" name="txtToTime"
+						id="txtToDay" value="00">
+					<div class="input-group-append">
+						<span class="input-group-text">시</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="input-group mb-3" id="inputCheckbox">
+				<span id="checkboxFont">TS</span>
+				<input type="checkbox" class="form-control" name="ts" id="ts" value="ts">
+			</div>
+			
+			<div class="carringInOutOption">
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="imexportInput">
+						<div class="input-group-append">
+							<span class="input-group-text">I/X</span>
+						</div>
+						<select name="imexport" id="slctImExport" class="form-control">
+							<option id="imexport" value="all">*</option>
+							<option id="imexport" value="i">수입</option>
+							<option id="imexport" value="x">수출</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="fmInput">
+						<div class="input-group-append">
+							<span class="input-group-text">F/M</span>
+						</div>
+						<select name="fm" id="slctFM" class="form-control">
+							<option id="fm" value="all">*</option>
+							<option id="fm" value="f">FULL</option>
+							<option id="fm" value="m">EMPTY</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="sizeInput">
+						<div class="input-group-append">
+							<span class="input-group-text">Size</span>
+						</div>
+						<select name="size" id="slctSize" class="form-control">
+							<option id="size" value="all">*</option>
+							<option id="size" value="20">20</option>
+							<option id="size" value="40">40</option>
+							<option id="size" value="45">45</option>
+							<option id="size" value="HC">HC</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="typeInput">
+						<div class="input-group-append">
+							<span class="input-group-text">Type</span>
+						</div>
+						<select name="type" id="slctType" class="form-control">
+							<option id="type" value="all">*</option>
+							<option id="type" value="DC">DC</option>
+							<option id="type" value="RF">RF</option>
+							<option id="type" value="OT">OT</option>
+							<option id="type" value="PL">PL</option>
+							<option id="type" value="TK">TK</option>
+							<option id="type" value="BK">BK</option>
+							<option id="type" value="AS">AS</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="carringInOutOption">
+					<div class="input-group mb-3" id="unitInput">
+						<div class="input-group-append">
+							<span class="input-group-text">단위</span>
+						</div>
+						<select name="unit" id="slctUnit" class="form-control">
+							<option id="unit" value="van">VAN</option>
+							<option id="unit" value="teu">TEU</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<button type="submit" id="searchBtn" class="searchBtn2" formaction="${cpath }/carringInOutByTime">검색</button>
+		</form>
+	</div>
+	<br>
+	<div align="center">
+		<table class="table table-hover" id="resultTbl">
+			<thead>
+				<tr>
+					<th>선택</th>
+					<th scope="col" style="width: 82px;">구분</th>
+					<c:forEach var="i" begin="0" end="23" step="1" >
+						<th scope="col">${i}</th>
+					</c:forEach>
+					<th scope="col">합계</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="item" items="${data }">   
+					<tr>
+					  <td><input type="checkbox" name="user_CheckBox" ></td>  
+				      <th scope="row">${item.gubun }</th>
+				      <td>${item.time1 }</td>
+				      <td>${item.time2 }</td>
+				      <td>${item.time3 }</td>
+				      <td>${item.time4 }</td>
+				      <td>${item.time5 }</td>
+				      <td>${item.time6 }</td>
+				      <td>${item.time7 }</td>
+				      <td>${item.time8 }</td>
+				      <td>${item.time9 }</td>
+				      <td>${item.time10 }</td>
+				      <td>${item.time11 }</td>
+				      <td>${item.time12 }</td>
+				      <td>${item.time13 }</td>
+				      <td>${item.time14 }</td>
+				      <td>${item.time15 }</td>
+				      <td>${item.time16 }</td>
+				      <td>${item.time17 }</td>
+				      <td>${item.time18 }</td>
+				      <td>${item.time19 }</td>
+				      <td>${item.time20 }</td>
+				      <td>${item.time21 }</td>
+				      <td>${item.time22 }</td>
+				      <td>${item.time23 }</td>
+				      <td>${item.time24 }</td>
+				      <td>${item.tot }</td>
+				    </tr>
+				</c:forEach>
+				<c:if test="${flag eq 'fail' }">
+					<th colspan="26" scope="row" style="text-align: center;">날짜 형식이 잘 못 되었습니다.</th>
+				</c:if>
+				<c:if test="${data == null && flag != 'fail'}">
+					<th colspan="26" scope="row" style="text-align: center;">조회 할 기간을 입력하세요.</th>
+				</c:if>
+			</tbody>
+		</table>
+		
+		<button type="button" id="selectBtn" class="selectBtn">그래프 보기</button>
+		
+	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	    <script type="text/javascript">
+		  	$("#selectBtn").click(function(){ 
+		    	var rowData = new Array(); 
+	     		var tdArr = new Array();
+		        var checkbox = $("input[name=user_CheckBox]:checked");
+		        
+		     	// 체크된 체크박스 값을 가져온다
+	            checkbox.each(function(i) {
+	    
+	                // checkbox.parent() : checkbox의 부모는 <td>이다.
+	                // checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+	                var tr = checkbox.parent().parent().eq(i);
+	                var td = tr.children();
+	                
+	                // 체크된 row의 모든 값을 배열에 담는다.
+	                rowData.push(tr.text());
+	                
+	                // td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+	                var time1 = td.eq(2).text();
+	                var time2 = td.eq(3).text();
+	                var time3 = td.eq(4).text();
+	                var time4 = td.eq(5).text();
+	                var time5 = td.eq(6).text();
+	                var time6 = td.eq(7).text();
+	                var time7 = td.eq(8).text();
+	                var time8 = td.eq(9).text();
+	                var time9 = td.eq(10).text();
+	                var time10 = td.eq(11).text();
+	                var time11 = td.eq(12).text();
+	                var time12 = td.eq(13).text();
+	                var time13 = td.eq(14).text();
+	                var time14 = td.eq(15).text();
+	                var time15 = td.eq(16).text();
+	                var time16 = td.eq(17).text();
+	                var time17 = td.eq(18).text();
+	                var time18 = td.eq(19).text();
+	                var time19 = td.eq(20).text();
+	                var time20 = td.eq(21).text();
+	                var time21 = td.eq(22).text();
+	                var time22 = td.eq(23).text();
+	                var time23 = td.eq(24).text();
+	                var time24 = td.eq(25).text();
+
+	                // 가져온 값을 배열에 담는다.
+	                tdArr.push(time1);
+	                tdArr.push(time2);
+	                tdArr.push(time3);
+	                tdArr.push(time4);
+	                tdArr.push(time5);
+	                tdArr.push(time6);
+	                tdArr.push(time7);
+	                tdArr.push(time8);
+	                tdArr.push(time9);
+	                tdArr.push(time10);
+	                tdArr.push(time11);
+	                tdArr.push(time12);
+	                tdArr.push(time13);
+	                tdArr.push(time14);
+	                tdArr.push(time15);
+	                tdArr.push(time16);
+	                tdArr.push(time17);
+	                tdArr.push(time18);
+	                tdArr.push(time19);
+	                tdArr.push(time20);
+	                tdArr.push(time21);
+	                tdArr.push(time22);
+	                tdArr.push(time23);
+	                tdArr.push(time24);
+	            });
+		     	
+    
+	            $("#chart_div").html(tdArr);
+		     	
+		  	    google.charts.load('current', {'packages':['corechart']});
+			    google.charts.setOnLoadCallback(drawVisualization);
+		     	
+	            console.log("no : " + tdArr[0]);
+	            function drawVisualization() {
+	            var data = google.visualization.arrayToDataTable([
+	                ['', ],
+	                ['0',  tdArr[0]],
+	                ['1',  tdArr[1]],
+	                ['2',  tdArr[2]],
+	                ['3',  tdArr[3]],
+	                ['4',  tdArr[4]],
+	                ['5',  tdArr[5]],
+	                ['6',  tdArr[6]],
+	                ['7',  tdArr[7]],
+	                ['8',  tdArr[8]],
+	                ['9',  tdArr[9]],
+	                ['10',  tdArr[10]],
+	                ['11',  tdArr[11]],
+	                ['12',  tdArr[12]],
+	                ['13',  tdArr[13]],
+	                ['14',  tdArr[14]],
+	                ['15',  tdArr[15]],
+	                ['16',  tdArr[16]],
+	                ['17',  tdArr[17]],
+	                ['18',  tdArr[18]],
+	                ['19',  tdArr[19]],
+	                ['20',  tdArr[20]],
+	                ['21',  tdArr[21]],
+	                ['22',  tdArr[22]],
+	                ['23',  tdArr[23]]
+	            ]);
+
+	            var options = {
+	                seriesType: 'bars',
+	                series: {5: {type: 'line'}}       
+	            };
+	
+	            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+	            chart.draw(data, options);
+	            }
+			});
+  		</script>
+	</div>
+	
+    <div id="chart_div" style="width: 1262px; height: 500px;" align="center"></div>
+</section>
+</body>
+</html>

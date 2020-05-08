@@ -1,0 +1,18 @@
+package com.dbinc.pgm.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.dbinc.pgm.service.CarringInOutByPeriodStatusService;
+import com.dbinc.pgm.vo.CarringInOutByTimeVO;
+import com.dbinc.pgm.vo.CarringInOutSearchVO;
+
+@Service("carringInOutByPeriodStatusService")
+public class CarringInOutByPeriodStatusServiceImpl implements CarringInOutByPeriodStatusService {
+	@Override
+	public List<CarringInOutByTimeVO> carringInOutByTime(CarringInOutSearchVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

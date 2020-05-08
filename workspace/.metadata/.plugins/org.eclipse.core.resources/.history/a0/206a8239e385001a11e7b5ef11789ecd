@@ -1,0 +1,9 @@
+package com.dbinc.pgm.service.dao;
+
+import java.util.List;
+
+import com.dbinc.pgm.vo.OperCdVO;
+
+public interface OperCdDAO {
+	List<OperCdVO> selectOperCdList() throws Exception;
+}

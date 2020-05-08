@@ -1,0 +1,19 @@
+package com.dbinc.pgm.service.dao;
+
+import java.util.List;
+
+import com.dbinc.pgm.MonthlyJobStatusVO;
+import com.dbinc.pgm.vo.DailyInstallResultVO;
+import com.dbinc.pgm.vo.DailyJobStatusVO;
+import com.dbinc.pgm.vo.OperCdVO;
+import com.dbinc.pgm.vo.SearchVO;
+
+public interface JobTotalDAO {
+	List<OperCdVO> selectOperCdList() throws Exception;
+
+	List<DailyInstallResultVO> selectDailyInstallList(SearchVO vo) throws Exception;
+
+	List<DailyJobStatusVO> selectDailyJobStatus(SearchVO vo) throws Exception;
+
+	List<MonthlyJobStatusVO> selectMonthlyJobStatus(SearchVO vo) throws Exception;
+}

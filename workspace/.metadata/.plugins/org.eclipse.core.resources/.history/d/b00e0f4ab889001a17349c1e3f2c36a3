@@ -1,0 +1,217 @@
+package com.dbinc.pgm.vo;
+
+public class CarringInOutByTimeVO {
+	String gubun;
+	double time1, time2, time3, time4, time5, time6, time7, time8, time9, time10, time11, time12, time13, time14,
+			time15, time16, time17, time18, time19, time20, time21, time22, time23, time24;
+	double tot;
+
+	public String getGubun() {
+		return gubun;
+	}
+
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
+	}
+
+	public double getTime1() {
+		return time1;
+	}
+
+	public void setTime1(double time1) {
+		this.time1 = time1;
+	}
+
+	public double getTime2() {
+		return time2;
+	}
+
+	public void setTime2(double time2) {
+		this.time2 = time2;
+	}
+
+	public double getTime3() {
+		return time3;
+	}
+
+	public void setTime3(double time3) {
+		this.time3 = time3;
+	}
+
+	public double getTime4() {
+		return time4;
+	}
+
+	public void setTime4(double time4) {
+		this.time4 = time4;
+	}
+
+	public double getTime5() {
+		return time5;
+	}
+
+	public void setTime5(double time5) {
+		this.time5 = time5;
+	}
+
+	public double getTime6() {
+		return time6;
+	}
+
+	public void setTime6(double time6) {
+		this.time6 = time6;
+	}
+
+	public double getTime7() {
+		return time7;
+	}
+
+	public void setTime7(double time7) {
+		this.time7 = time7;
+	}
+
+	public double getTime8() {
+		return time8;
+	}
+
+	public void setTime8(double time8) {
+		this.time8 = time8;
+	}
+
+	public double getTime9() {
+		return time9;
+	}
+
+	public void setTime9(double time9) {
+		this.time9 = time9;
+	}
+
+	public double getTime10() {
+		return time10;
+	}
+
+	public void setTime10(double time10) {
+		this.time10 = time10;
+	}
+
+	public double getTime11() {
+		return time11;
+	}
+
+	public void setTime11(double time11) {
+		this.time11 = time11;
+	}
+
+	public double getTime12() {
+		return time12;
+	}
+
+	public void setTime12(double time12) {
+		this.time12 = time12;
+	}
+
+	public double getTime13() {
+		return time13;
+	}
+
+	public void setTime13(double time13) {
+		this.time13 = time13;
+	}
+
+	public double getTime14() {
+		return time14;
+	}
+
+	public void setTime14(double time14) {
+		this.time14 = time14;
+	}
+
+	public double getTime15() {
+		return time15;
+	}
+
+	public void setTime15(double time15) {
+		this.time15 = time15;
+	}
+
+	public double getTime16() {
+		return time16;
+	}
+
+	public void setTime16(double time16) {
+		this.time16 = time16;
+	}
+
+	public double getTime17() {
+		return time17;
+	}
+
+	public void setTime17(double time17) {
+		this.time17 = time17;
+	}
+
+	public double getTime18() {
+		return time18;
+	}
+
+	public void setTime18(double time18) {
+		this.time18 = time18;
+	}
+
+	public double getTime19() {
+		return time19;
+	}
+
+	public void setTime19(double time19) {
+		this.time19 = time19;
+	}
+
+	public double getTime20() {
+		return time20;
+	}
+
+	public void setTime20(double time20) {
+		this.time20 = time20;
+	}
+
+	public double getTime21() {
+		return time21;
+	}
+
+	public void setTime21(double time21) {
+		this.time21 = time21;
+	}
+
+	public double getTime22() {
+		return time22;
+	}
+
+	public void setTime22(double time22) {
+		this.time22 = time22;
+	}
+
+	public double getTime23() {
+		return time23;
+	}
+
+	public void setTime23(double time23) {
+		this.time23 = time23;
+	}
+
+	public double getTime24() {
+		return time24;
+	}
+
+	public void setTime24(double time24) {
+		this.time24 = time24;
+	}
+
+	public double getTot() {
+		return tot;
+	}
+
+	public void setTot(double tot) {
+		this.tot = tot;
+	}
+
+}

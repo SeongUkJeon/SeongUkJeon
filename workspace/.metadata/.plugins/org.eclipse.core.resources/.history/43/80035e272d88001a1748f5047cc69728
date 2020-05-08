@@ -1,0 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<nav>
+	<a href="${cpath }/yardInstallStatus" class="text-dark">
+												YARD 장치 현황(現)
+											</a>
+	<a>작업 현황(日)</a>
+	<a>작업 현황(月)</a>
+</nav>

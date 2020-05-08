@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="resultTbl" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="resultTbl"/>
+			<item value="decode(to_char(gin_dt, &apos;d&apos;)"/>
+			<item value="decode(to_char(gin_dt, &apos;d&apos;),1,decode(substr(sz_cd, 1, 1), &apos;2&apos;, 1, 2),"/>
+			<item value="decode(to_char(gin_dt, &apos;d&apos;),                     1,                     decode(substr(sz_cd, 1, 1), &apos;2&apos;, 1, 2),"/>
+			<item value="sum(decode(to_char(gin_dt, &apos;d&apos;),"/>
+			<item value="time1"/>
+			<item value="토요일"/>
+			<item value="금요일"/>
+			<item value="목요일"/>
+			<item value="수요일"/>
+			<item value="화요일"/>
+			<item value="월요일"/>
+			<item value="selectBtn"/>
+			<item value="*10)/10.0"/>
+			<item value="resultTbl2"/>
+		</list>
+		<list key="replacehistory">
+			<item value="saturday"/>
+			<item value="friday"/>
+			<item value="thursday"/>
+			<item value="wednesday"/>
+			<item value="tuesday"/>
+			<item value="monday"/>
+			<item value=""/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="288" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="390" key="DIALOG_HEIGHT"/>
+		<item value="1365" key="DIALOG_X_ORIGIN"/>
+		<item value="112" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

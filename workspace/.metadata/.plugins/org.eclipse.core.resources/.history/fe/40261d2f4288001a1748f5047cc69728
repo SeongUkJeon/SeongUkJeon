@@ -1,0 +1,13 @@
+package com.dbinc.pgm.service.dao;
+
+import java.util.List;
+
+import com.dbinc.pgm.vo.DailyInstallResultVO;
+import com.dbinc.pgm.vo.DailyInstallSearchVO;
+import com.dbinc.pgm.vo.OperCdVO;
+
+public interface JobTotalDAO {
+	List<OperCdVO> selectOperCdList() throws Exception;
+
+	List<DailyInstallResultVO> selectDailyInstallList(DailyInstallSearchVO review) throws Exception;
+}

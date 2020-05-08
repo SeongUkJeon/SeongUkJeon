@@ -1,0 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/include/header.jsp"%>
+	<div align="center">
+		<img src="${cpath }/resources/images/jimin.png" style="height: 400px; width: auto; margin: 50px auto;">
+	</div>
+</body>
+</html>

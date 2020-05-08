@@ -1,0 +1,13 @@
+package com.dbinc.pgm.vo;
+
+public class BoardVO {
+	private String cntr_no;
+
+	public String getCntr_no() {
+		return cntr_no;
+	}
+
+	public void setCntr_no(String cntr_no) {
+		this.cntr_no = cntr_no;
+	}
+}

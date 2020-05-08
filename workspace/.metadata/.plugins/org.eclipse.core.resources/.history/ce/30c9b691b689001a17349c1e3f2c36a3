@@ -1,0 +1,217 @@
+package com.dbinc.pgm.vo;
+
+public class CarringInOutByTimeVO {
+	String gubun;
+	float time1, time2, time3, time4, time5, time6, time7, time8, time9, time10, time11, time12, time13, time14, time15,
+			time16, time17, time18, time19, time20, time21, time22, time23, time24;
+	float tot;
+
+	public String getGubun() {
+		return gubun;
+	}
+
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
+	}
+
+	public float getTime1() {
+		return time1;
+	}
+
+	public void setTime1(float time1) {
+		this.time1 = time1;
+	}
+
+	public float getTime2() {
+		return time2;
+	}
+
+	public void setTime2(float time2) {
+		this.time2 = time2;
+	}
+
+	public float getTime3() {
+		return time3;
+	}
+
+	public void setTime3(float time3) {
+		this.time3 = time3;
+	}
+
+	public float getTime4() {
+		return time4;
+	}
+
+	public void setTime4(float time4) {
+		this.time4 = time4;
+	}
+
+	public float getTime5() {
+		return time5;
+	}
+
+	public void setTime5(float time5) {
+		this.time5 = time5;
+	}
+
+	public float getTime6() {
+		return time6;
+	}
+
+	public void setTime6(float time6) {
+		this.time6 = time6;
+	}
+
+	public float getTime7() {
+		return time7;
+	}
+
+	public void setTime7(float time7) {
+		this.time7 = time7;
+	}
+
+	public float getTime8() {
+		return time8;
+	}
+
+	public void setTime8(float time8) {
+		this.time8 = time8;
+	}
+
+	public float getTime9() {
+		return time9;
+	}
+
+	public void setTime9(float time9) {
+		this.time9 = time9;
+	}
+
+	public float getTime10() {
+		return time10;
+	}
+
+	public void setTime10(float time10) {
+		this.time10 = time10;
+	}
+
+	public float getTime11() {
+		return time11;
+	}
+
+	public void setTime11(float time11) {
+		this.time11 = time11;
+	}
+
+	public float getTime12() {
+		return time12;
+	}
+
+	public void setTime12(float time12) {
+		this.time12 = time12;
+	}
+
+	public float getTime13() {
+		return time13;
+	}
+
+	public void setTime13(float time13) {
+		this.time13 = time13;
+	}
+
+	public float getTime14() {
+		return time14;
+	}
+
+	public void setTime14(float time14) {
+		this.time14 = time14;
+	}
+
+	public float getTime15() {
+		return time15;
+	}
+
+	public void setTime15(float time15) {
+		this.time15 = time15;
+	}
+
+	public float getTime16() {
+		return time16;
+	}
+
+	public void setTime16(float time16) {
+		this.time16 = time16;
+	}
+
+	public float getTime17() {
+		return time17;
+	}
+
+	public void setTime17(float time17) {
+		this.time17 = time17;
+	}
+
+	public float getTime18() {
+		return time18;
+	}
+
+	public void setTime18(float time18) {
+		this.time18 = time18;
+	}
+
+	public float getTime19() {
+		return time19;
+	}
+
+	public void setTime19(float time19) {
+		this.time19 = time19;
+	}
+
+	public float getTime20() {
+		return time20;
+	}
+
+	public void setTime20(float time20) {
+		this.time20 = time20;
+	}
+
+	public float getTime21() {
+		return time21;
+	}
+
+	public void setTime21(float time21) {
+		this.time21 = time21;
+	}
+
+	public float getTime22() {
+		return time22;
+	}
+
+	public void setTime22(float time22) {
+		this.time22 = time22;
+	}
+
+	public float getTime23() {
+		return time23;
+	}
+
+	public void setTime23(float time23) {
+		this.time23 = time23;
+	}
+
+	public float getTime24() {
+		return time24;
+	}
+
+	public void setTime24(float time24) {
+		this.time24 = time24;
+	}
+
+	public float getTot() {
+		return tot;
+	}
+
+	public void setTot(float tot) {
+		this.tot = tot;
+	}
+
+}

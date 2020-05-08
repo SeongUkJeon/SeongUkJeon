@@ -1,0 +1,19 @@
+package com.dbinc.pgm.service;
+
+import java.util.List;
+
+import com.dbinc.pgm.vo.DailyInstallResultVO;
+import com.dbinc.pgm.vo.DailyJobStatusVO;
+import com.dbinc.pgm.vo.MonthlyJobStatusVO;
+import com.dbinc.pgm.vo.OperCdVO;
+import com.dbinc.pgm.vo.SearchVO;
+
+public interface JobTotalService {
+	List<OperCdVO> selectOperCdList() throws Exception;
+
+	List<DailyInstallResultVO> selectDailyInstallList(SearchVO vo) throws Exception;
+
+	List<DailyJobStatusVO> dailyJobStatus(SearchVO vo) throws Exception;
+
+	List<MonthlyJobStatusVO> monthlyJobStatus(SearchVO vo) throws Exception;
+}
