@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ordersDAO">
+	<insert id="orderInfo" parameterType="orders">
+		insert into orders(orderid, userid, orderrec, useraddr1, useraddr2, useraddr3, orderphone, amount)
+		values(#{orderid}, #{userid}, #{orderrec}, #{useraddr1}, #{useraddr2}, #{useraddr3}, #{orderphone}, #{amount})
+	</insert>
+	
+	<insert id="orderInfo_Detail" parameterType="orderDetail">
+		insert into order_detail(orderdetailnum, orderid, product_code, basketstock)
+		select order_detail_seq.nextval, #{orderid}, product_code, basketstock from basket
+	</insert>
+	
+	<insert id="orderInfo_Detail2" parameterType="orderDetail">
+		insert into order_detail (orderdetailnum, orderid, product_code, basketstock)
+		values (order_detail_seq.nextval, #{orderid}, #{product_code}, #{basketstock})
+	</insert>  
+	
+	<select id="orderList" resultType="orders">
+		 select
+		     orderid, userid, orderrec, useraddr1, useraddr2, useraddr3, orderphone, amount, orderdate, delivery, invoicenum
+		 from orders where userid = #{userid} ORDER BY orderdate DESC
+	</select>
+	
+	<!-- 모든 유저의 주문 목록 -->
+	<select id="allOrderList" resultType="orders">
+		select orderid, userid, orderrec, useraddr1, useraddr2, useraddr3, orderPhone, amount, orderdate, delivery
+		from orders ORDER BY orderdate DESC
+	</select>
+	
+	<!-- 특정 주문 목록 -->
+	<select id="orderViewFromUserid" resultType="orderList">
+		select orders.orderid, orders.userid, orders.orderrec, orders.useraddr1, orders.useraddr2, orders.useraddr3, orders.orderphone, orders.amount, 
+			orders.orderdate, orders.delivery, order_detail.orderdetailnum, order_detail.product_code, order_detail.basketstock, product.product_name,
+			product.product_image1, product.product_price, product.product_detail1, product.product_detail2
+		from orders inner join order_detail on orders.orderId = order_detail.orderid inner join product on order_detail.product_code = product.product_code 
+		where orders.userid = #{userid} 
+	</select>
+	
+	<select id="orderViewFromOrderid" resultType="orderList">
+		select orders.orderid, orders.userid, orders.orderrec, orders.useraddr1, orders.useraddr2, orders.useraddr3, orders.orderphone, orders.amount, 
+			orders.orderdate, orders.delivery, order_detail.orderdetailnum, order_detail.product_code, order_detail.basketstock, product.product_name,
+			product.product_image1, product.product_price, product.product_detail1, product.product_detail2
+		from orders inner join order_detail on orders.orderId = order_detail.orderid inner join product on order_detail.product_code = product.product_code 
+		where orders.orderid = #{orderid} 
+	</select>
+	
+	<update id="delivery" parameterType="orders">
+		update orders
+		set delivery = #{delivery}, invoicenum = #{invoicenum}
+		where orderid = #{orderid}
+	</update>
+	
+	<select id="changeQuantity_sub" resultType="orderDetail">
+		select orderid, product_code, basketstock
+		from order_detail 
+		where orderid = #{orderid} 
+	</select>
+	
+	<delete id="deleteOrder">
+		delete orders where orderid = #{orderid}
+	</delete>
+	
+	<delete id="deleteOrderDetail">
+		delete order_detail where orderid = #{orderid}
+	</delete>
+	
+	<select id="getDeliveryTypeCnt" resultType="int">
+		select count(*) from orders where delivery = #{delivery}
+	</select>
+	
+	<select id="deliveryTypeOrderList" resultType="orders">
+		select orderid, userid, orderrec, useraddr1, useraddr2, useraddr3, orderPhone, amount, orderdate, delivery
+		from orders where delivery=#{delivery} ORDER BY orderdate DESC
+	</select>
+</mapper>

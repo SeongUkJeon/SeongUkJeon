@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberDAO">
+	<!-- parameterType="자료형": resultType의 결과 자료형 -->
+	<select id="memberById" parameterType="String" resultType="member">
+		select * from member where userid = #{userid}
+	</select>
+	
+	<insert id="join" parameterType="member">
+		insert into member (userid, userpw, username, address, phone, gender, email, birth)
+		values (#{userid}, #{userpw}, #{username}, #{address}, #{phone}, #{gender}, #{email}, #{birth})
+	</insert>
+	
+	<update id="modify" parameterType="member">
+		update member 
+		set 
+				userpw = #{userpw}, 
+				username = #{username},
+				phone = #{phone},
+				address = #{address}
+		where
+			userid = #{userid}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		update member
+		set
+			WITHDRAWAL = 1
+		where 
+			userid = #{userid}
+	</delete>
+	<!-- 관리자를 제외한 모든 회원의 수를 가져온다(단, 검색을 하면 검색한 회원수만 가져온다 -->
+	<select id="getCountMember" parameterType="hashmap" resultType="int">
+		select count(*) from member where withdrawal != 2
+			and ${type} like '%'|| #{search} || '%'
+		
+	</select>
+	
+	<!-- 관리자를 제외한 모든 회원의 수를 가져온다(단, 검색을 하면 검색한 회원수만 가져온다 -->
+	<select id="getCountMember1" resultType="int">
+		select count(*) from member where withdrawal != 2
+		
+	</select>
+		
+	<!-- 페이지에 해당하는 회원정보를 받는다 -->
+	<select id="selectMember" parameterType="hashmap" resultType="member">
+			select * from (select rownum as st, A.* from 
+			(select * from member where withdrawal != 2
+			and ${type} like '%'|| #{search} || '%'
+			 <![CDATA[order by MDATE desc) A 
+			where rownum <= #{end}) where st >= #{start}]]>
+			
+	</select>
+	
+	<!-- 페이지에 해당하는 회원정보를 받는다 -->
+	<select id="selectMember1" parameterType="hashmap" resultType="member">
+			select * from (select rownum as st, A.* from 
+			(select * from member where withdrawal != 2
+			 <![CDATA[order by MDATE desc) A 
+			where rownum <= #{end}) where st >= #{start}]]>
+	</select>
+</mapper>
